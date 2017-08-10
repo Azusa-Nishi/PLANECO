@@ -1,0 +1,23 @@
+<?php
+$imageData = $_POST['image'];
+$ext = "";
+$filename = uniqid().'.png';
+$fname = '../../upload/'.$filename;
+error_log($fname);
+$fp = fopen($fname, 'w');
+fwrite($fp,base64_decode($imageData));
+fclose($fp);
+$wh = getimagesize($fname);
+error_log($wh[0]);
+$ws = intval(20000/$wh[0]);
+error_log($ws);
+system("/usr/bin/convert -geometry '$ws%' $fname ../../upload/thumbnail/$filename");
+$hoge = "/usr/bin/convert -geometry '$ws%' $fname ../../upload/thumbnail/$filename";
+error_log($hoge);
+header("Content-type: application/xml");
+echo '<?xml version="1.0" encoding="UTF-8" ?> ' . "\n";
+echo '  <xml>'."\n";
+echo '  <item>'."\n";
+echo '      <planetimage>'.$filename.'</planetimage>'."\n";
+echo '  </item>'."\n";
+echo '</xml>'."\n";

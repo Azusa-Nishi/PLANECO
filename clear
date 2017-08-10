@@ -1,0 +1,6 @@
+#!/bin/sh
+/bin/rm -rf upload/*
+cd db
+echo "delete from chat_log;" | sqlite3 chat2.sqlite
+cd ../..
+chown www-data.www-data -R planeco

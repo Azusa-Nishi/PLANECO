@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>読んでね</title>
+<style type="text/css">
+* {
+	margin: 0px;
+	padding: 0;
+}
+
+html, body {
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	font-size: 14px;
+	line-height: 1.6em;
+}
+
+a:link {
+	color: #009900;
+}
+a:visited {
+	color: #009900;
+}
+a:hover {
+	color: #FF6600;
+	font-style: normal;
+}
+a:active {
+}
+img {
+	border:none
+}
+#container {
+	padding: 10px;
+	width: 900px;
+	margin-right: auto;
+	margin-left: auto;
+}
+p{
+	padding-bottom: 15px;
+}
+h3{
+	border-bottom: 2px solid #DDDDDD;
+	margin-bottom: 5px;
+	margin-top: 15px;
+}
+.memo{
+	color: #4F4F4F;
+	font-size: 85%;
+}
+</style>
+	<script type="text/javascript" src="http://php-powered.net/syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="http://php-powered.net/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="http://php-powered.net/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+	<link type="text/css" rel="stylesheet" href="http://php-powered.net/syntaxhighlighter/styles/shCoreDefault.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body>
+<div id="container"> 
+  <p>jQueryチャット Sqlite版のご利用有難う御座います。</p>
+  <h3>データベースに関して</h3>
+  <p>Sqlite版はログの保存にSqliteデータベースを利用します。データベースファイルは<strong>db/chat.sqlite</strong>となりますが、セキュリティを考えるとブラウザからアクセス出来ない場所に変更した方が安心です。</p>
+  <h4>common/php/chat.php</h4>
+<pre class="brush: php;">
+/*
+ * SQLiteの場所
+ * 相対パスで書かれていますが、出来るだけWEB公開ディレクトリを避けて設置し
+ * 絶対パスで指定するなどセキュリティに配慮して下さい。
+ */
+define('SQLITE','../../db/chat.sqlite');
+</pre>
+  <p>コメントのように、デフォルトでは<strong>相対パス</strong>で指定していますが、db/をWEB非公開ディレクトリに移動し、絶対パスで指定します。なお、デフォルトのままでも<strong>db/.htaccess</strong>により、アクセスは出来なくなっています。</p>
+  <h3>テーマに関して</h3>
+  <p>背景色を変更する事ができるコマンド「てーま」の処理はjsファイルに書かれており、そちらで変更・追加する事が可能です。  </p>
+  <p><strong>common/js/jquery.chat.js</strong></p>
+<pre class="brush: js;">
+  /* 
+   * Themeの設定と変更
+   * テーマは全体の背景色と背景画像を指定する事が出来ます。
+   * 数を増やした場合はその分だけ以下の設定を変更して下さい。
+   * var n = Math.ceil( Math.random()*7 );
+   *----------------------------------------------------------------------*/
+    function Theme(){
+      var n = Math.ceil( Math.random()*7 ); //0~7までの整数をランダムで生成
+      
+      var Theme = new Array;
+      Theme[0] = {'bgcolor':'#BCFFCE' , 'bgimage':'none' };
+      Theme[1] = {'bgcolor':'#ffc0cb' , 'bgimage':'none' };
+      Theme[2] = {'bgcolor':'#98fb98' , 'bgimage':'none' };
+      Theme[3] = {'bgcolor':'#db7093' , 'bgimage':'none' };
+      Theme[4] = {'bgcolor':'#a9a9a9' , 'bgimage':'none' };
+      Theme[5] = {'bgcolor':'#e6e6fa' , 'bgimage':'none' };
+      Theme[6] = {'bgcolor':'#bdb76b' , 'bgimage':'none' };
+      Theme[7] = {'bgcolor':'#778899' , 'bgimage':'url(thema_img/01.png)' };
+
+      var set_Theme = Theme[n];
+      if(!set_Theme) set_Theme = Theme[0];
+
+      if(set_Theme.bgcolor){
+        $("body").css({"background-color":set_Theme.bgcolor});
+        $("#container").css({"background-color":set_Theme.bgcolor});
+      }
+
+      if(set_Theme.bgimage){
+        $("#container").css({"background-image":set_Theme.bgimage});
+      }
+      
+    }
+</pre>
+<p>フォントカラーの変更は行っていませんので、薄めの背景色の方が良いと思います。</p>
+<h3>おみくじに関して</h3>
+  <p><strong>common/php/omikuzi.php</strong></p>
+  <p>上記ファイルで変更や追加が可能です。</p>
+  <h3>チャットルーム作成に関して</h3>
+  <p>基本的にHTMLの複製で増やす事になりますが、これを1つのPHPファイルに纏める事も可能です。</p>
+  <p>付属の<strong>php-example.php</strong>を参照して下さい。</p>
+  <p>GETパラメーターをルームナンバーとする事で、チャットルームを増やす形です。ただ、そのままですと無限に部屋を作られてしまうので、ファイル内で指定していないパラメーターの場合は404を表示します。</p>
+  <p>これを上手く使えば、ユーザーにプライベートチャットルームを作らせる事も可能ではあると思います。</p>
+  <p><strong>http://xxx.xxx/php-example.php?room=001</strong></p>
+  <h3>ご注意</h3>
+  <p>既にチャットルームを運用中にデータベースを空にする、或いはログのあるルームナンバーのデータを全て消去するなどした場合は問題が発生する場合が有ります。その場合は一度ブラウザを閉じて再アクセスして下さい。一番最初に<strong><em>「システム:チャットルームが有効になりました」</em></strong>というメッセージが記録されますので、それを確認してから運用して下さい。</p>
+</div>
+</body>
+</html>
