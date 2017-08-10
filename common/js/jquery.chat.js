@@ -687,7 +687,7 @@ console.log(good, goodwho);
 		if(cls == "li1"){
              return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
 		}else{
-             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'G'+good+'</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
 		}
            }
            else if(img === 'STUMP'){
