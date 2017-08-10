@@ -434,6 +434,7 @@ console.log("LON:"+lon+" LAT:"+lat);
             $("#chat").slideUp();
             $("#header").slideUp();
             $("#camera").slideUp();
+            $("#stump_wrap").slideUp();
             $("#message").hide();
             $("#planetwin").slideDown();
         }
@@ -456,6 +457,7 @@ console.log("LON:"+lon+" LAT:"+lat);
               $("#chat").slideUp();
               $("#header").slideUp();
               $("#camera").slideUp();
+              $("#stump_wrap").slideUp();
               $("#message").hide();
               $("#nurturewin").slideDown();
             }
