@@ -344,7 +344,7 @@ if(isset($_POST) AND is_array($_POST)){
 /*
  * スタンプ
  */
-    case 'gostump':
+    case 'gostamp':
     //発言制限の時間
       if(!$_SESSION['write_limit']) $_SESSION['write_limit'] = time();
       if(time() < $_SESSION['write_limit']){
@@ -359,7 +359,7 @@ if(isset($_POST) AND is_array($_POST)){
           ,':hash'         => $hash
           ,':time'         => time()
           ,':chat_name'    => $_COOKIE['jquery_chat_name'.$post['room']]
-          ,':str'          => $post['stump']
+          ,':str'          => $post['stamp']
           ,':remoote_addr' => $_SERVER["REMOTE_ADDR"]
           ,':name_color'   => $name_color
           ,':log_color'    => $log_color
@@ -417,13 +417,13 @@ if(isset($_POST) AND is_array($_POST)){
       newLog();
     break; 
 /*
- * stumpのサムネイルを得る
+ * stampのサムネイルを得る
  */
-    case 'stump':
+    case 'stamp':
       header("Content-type: application/xml");
       echo '<?xml version="1.0" encoding="UTF-8" ?> ' . "\n";
       echo '  <xml>'."\n"; 
-      $res_dir = opendir('../../stump/thumbnail/');
+      $res_dir = opendir('../../stamp/thumbnail/');
         while( $file_name = readdir( $res_dir ) ){
           if($file_name != '.' AND $file_name != '..'){
            echo '  <item>'."\n"; 
