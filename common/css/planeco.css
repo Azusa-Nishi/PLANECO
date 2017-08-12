@@ -434,7 +434,7 @@ li{
   cursor:pointer;
 }
 
-#stump_wrap{
+#stamp_wrap{
   position: fixed !important;
   position: absolute;
   top: 67px;
@@ -451,7 +451,7 @@ li{
   padding-bottom: 5px;
   display:none;
 }
-#stump_wrap img{
+#stamp_wrap img{
   padding: 5px;
 }
 
