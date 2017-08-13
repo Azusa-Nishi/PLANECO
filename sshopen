@@ -1,0 +1,2 @@
+#!/bin/sh
+ssh -R 24022:localhost:22 azusa@westclan.jp
