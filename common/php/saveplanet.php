@@ -7,11 +7,12 @@ $request = isset($_SERVER['HTTP_X_REQUESTED_WITH'])
 if($request !== 'xmlhttprequest') exit;
 $json = file_get_contents("php://input");
 $obj = json_decode($json, true);
-$file_name = "save/planet".$obj[0]['unique'].".json";
+$file_name = "../../save/planet".$obj[0]['unique'].".json";
+error_log("Planet Save");
+error_log($file_name);
 // ファイル保存のおまじない
 $file = fopen($file_name, "w") or die("OPEN error $file_name");
 flock($file, LOCK_EX); fputs($file, $json."\n");
 flock($file, LOCK_UN);
 fclose($file);
 ?>
-
