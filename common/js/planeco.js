@@ -1094,10 +1094,12 @@ console.log(planetimage);
   function redraw(rflag){
     canvas.clear();
     allcost = 0;
-    rfname = "save/planet"+$.cookie(jquery_chat_unique)+".json";
-    $.when(redrawjson(rflag)).done(function() {
-      console.log("redraw-fin");
-    });
+    if($.cookie(jquery_chat_unique) !=== 'undefined'){
+      rfname = "save/planet"+$.cookie(jquery_chat_unique)+".json";
+        $.when(redrawjson(rflag)).done(function() {
+          console.log("redraw-fin");
+      });
+    }
   }
   canvas.on("object:selected", function(e){
     selo = e;
