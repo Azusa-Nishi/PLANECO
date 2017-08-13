@@ -203,16 +203,16 @@ if(isset($_POST) AND is_array($_POST)){
         $omikuzi = new Omikuzu;
         
         switch($log_str){
-          case 'おみくじ':
-            $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'さん] ';
+          case '#fortune':
+            $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'\'s fortune] ';
             $data[':str'] .= $omikuzi->Nomal();
           break;
-          case 'けんこう':
-            $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'さん] ';
+          case '#health':
+            $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'\'s health fortune] ';
             $data[':str'] .= $omikuzi->Kenko();
           break;
-          case 'れんあい':
-            $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'さん] ';
+          case '#love':
+            $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'\'s love fortune] ';
             $data[':str'] .= $omikuzi->Renai();
           break;
         }

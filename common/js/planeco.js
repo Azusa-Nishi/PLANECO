@@ -410,15 +410,15 @@ console.log("LON:"+lon+" LAT:"+lat);
  *****************************************************/
       $("#talk").click(function (e) {
         if($.cookie(jquery_chat_name)){
-          $("#planetwin").slideUp();
-          $("#nurturewin").slideUp();
-          $("#chat").slideDown();
-          $("#log").slideDown();
+          $("#planetwin").slideUp(600);
+          $("#nurturewin").slideUp(600);
+          $("#chat").slideDown(600);
+          $("#log").slideDown(600);
 	  readLog();
           $(function(){
             setTimeout(function(){
               cs_top();
-            },1000);
+            },600);
           });
         }
         e.preventDefault();
@@ -429,14 +429,14 @@ console.log("LON:"+lon+" LAT:"+lat);
  *****************************************************/
       $("#planet").click(function (e) {
         if($.cookie(jquery_chat_name)){
-            $("#log").slideUp();
-            $("#nurturewin").slideUp();
-            $("#chat").slideUp();
-            $("#header").slideUp();
-            $("#camera").slideUp();
-            $("#stamp_wrap").slideUp();
-            $("#message").hide();
-            $("#planetwin").slideDown();
+            $("#log").slideUp(600);
+            $("#nurturewin").slideUp(600);
+            $("#chat").slideUp(600);
+            $("#header").slideUp(600);
+            $("#camera").slideUp(600);
+            $("#stamp_wrap").slideUp(600);
+            $("#message").hide(600);
+            $("#planetwin").slideDown(600);
         }
         e.preventDefault();
       });
@@ -452,14 +452,14 @@ console.log("LON:"+lon+" LAT:"+lat);
 	    $('#allcostp').text(allcost);
 	    $('#allitemp').text(allitem);
             if($.cookie(jquery_chat_name)){
-              $("#log").slideUp();
-              $("#planetwin").slideUp();
-              $("#chat").slideUp();
-              $("#header").slideUp();
-              $("#camera").slideUp();
-              $("#stamp_wrap").slideUp();
-              $("#message").hide();
-              $("#nurturewin").slideDown();
+              $("#log").slideUp(600);
+              $("#planetwin").slideUp(600);
+              $("#chat").slideUp(600);
+              $("#header").slideUp(600);
+              $("#camera").slideUp(600);
+              $("#stamp_wrap").slideUp(600);
+              $("#message").hide(600);
+              $("#nurturewin").slideDown(600);
             }
             e.preventDefault();
 	  }
@@ -608,18 +608,17 @@ console.log(good, goodwho);
        //コマンド処理
        //=========================================
           //テーマを変える 
-            if(val === 'てーま'){
+            if(val === '#theme'){
               Theme();
               $("#var").val('');
               return ;
             }
-            
-            if(val === 'せつめい'){
+            if(val === '#help'){
               var str  = '<li class="li3" id="setumei">';
-                  str += '[てーま]<br />背景色がランダムで変更します<br />';
-                  str += '[おみくじ]<br />おみくじが引けます<br />';
-                  str += '[けんこう]<br />健康運を占います<br />';
-                  str += '[れんあい]<br />恋愛運を占います<br />';
+                  str += '[#theme]<br />Background color will be changed randomly.<br />';
+                  str += '[#fortune]<br />Draw a fortune slip<br />';
+                  str += '[#health]<br />Draw a fortune slip of health.<br />';
+                  str += '[#love]<br />Draw a fortune slip of love.<br />';
                   str += '</li>';
                   $('#log ul').append( str );
                   cs_top();
@@ -627,7 +626,7 @@ console.log(good, goodwho);
                   return ;
             }
             var kuzi = '';
-            if(val === 'おみくじ' || val === 'けんこう' || val === 'れんあい'){
+            if(val === '#fortune' || val === '#health' || val === '#love'){
               kuzi = val;
             }
               
@@ -925,18 +924,17 @@ console.log("cs_top");
    * var n = Math.ceil( Math.random()*7 );
    *----------------------------------------------------------------------*/
     function Theme(){
-      var n = Math.ceil( Math.random()*7 ); //0~7までの整数をランダムで生成
-      
       var Theme = new Array;
       Theme[0] = {'bgcolor':'#BCFFCE' , 'bgimage':'none' };
       Theme[1] = {'bgcolor':'#ffc0cb' , 'bgimage':'none' };
-      Theme[2] = {'bgcolor':'#98fb98' , 'bgimage':'none' };
-      Theme[3] = {'bgcolor':'#db7093' , 'bgimage':'none' };
-      Theme[4] = {'bgcolor':'#a9a9a9' , 'bgimage':'none' };
-      Theme[5] = {'bgcolor':'#e6e6fa' , 'bgimage':'none' };
-      Theme[6] = {'bgcolor':'#bdb76b' , 'bgimage':'none' };
-      Theme[7] = {'bgcolor':'#778899' , 'bgimage':'url(thema_img/01.png)' };
-
+      Theme[2] = {'bgcolor':'#98fb98' , 'bgimage':'url(common/images/planeco-icon.png)' };
+      Theme[3] = {'bgcolor':'#db7093' , 'bgimage':'url(common/images/moon.png)' };
+      Theme[4] = {'bgcolor':'#a9a9a9' , 'bgimage':'url(common/images/nodata.png)' };
+      Theme[5] = {'bgcolor':'#e6e6fa' , 'bgimage':'url(common/images/planet.png)' };
+      Theme[6] = {'bgcolor':'#bdb76b' , 'bgimage':'url(common/images/originalplanet.png)' };
+      Theme[7] = {'bgcolor':'#f0fff0' , 'bgimage':'none' };
+      Theme[8] = {'bgcolor':'#778899' , 'bgimage':'url(common/images/planet.png)' };
+      var n = Math.ceil( Math.random()*(Theme.length));
       var set_Theme = Theme[n];
       if(!set_Theme) set_Theme = Theme[0];
 
