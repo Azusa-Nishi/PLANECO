@@ -575,6 +575,7 @@ function readLog($roomid,$append,$lasthash,$len){
          echo '  <item xml:space="preserve">'."\n"; 
          echo '      <hash>'.$log['hash'].'</hash>'."\n"; 
          echo '      <cls>'.$log['log_sort'].'</cls>'."\n"; 
+         echo '      <unq>'.$log['chat_unique'].'</unq>'."\n"; 
          echo '      <name>'.$log['chat_name'].'</name>'."\n"; 
          echo '      <log>'.$log['str'].'</log>'."\n"; 
          echo '      <date>'.$date.'</date>'."\n"; 

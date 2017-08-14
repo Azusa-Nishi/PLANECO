@@ -655,6 +655,7 @@ console.log(good, goodwho);
  *****************************************************/
     function logRow(xml){
        var cls  = $(xml).find("cls").text();
+       var unq  = $(xml).find("unique").text();
        var name = $(xml).find("name").text();
        var log  = $(xml).find("log").text();
        var date = $(xml).find("date").text();
@@ -663,7 +664,7 @@ console.log(good, goodwho);
        var img  = $(xml).find("img").text();
        var hash = $(xml).find("hash").text();
        var good = $(xml).find("good").text();
-console.log( "cls:", cls, "name:", name, "log:", log, "date:", date, "col1:", col1, "col2:", col2, "img:", img, "hash:", hash, "good:", good);
+console.log( "cls:", cls, "unq", unq, "name:", name, "log:", log, "date:", date, "col1:", col1, "col2:", col2, "img:", img, "hash:", hash, "good:", good);
 console.log($.cookie(jquery_chat_name));
 
        var myname = $.cookie(jquery_chat_name);
