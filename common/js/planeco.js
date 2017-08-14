@@ -460,6 +460,7 @@ console.log("LON:"+lon+" LAT:"+lat);
               $("#stamp_wrap").slideUp(600);
               $("#message").hide(600);
               $("#nurturewin").slideDown(600);
+              cs_down();
             }
             e.preventDefault();
 	  }
@@ -662,11 +663,65 @@ console.log(good, goodwho);
        var img  = $(xml).find("img").text();
        var hash = $(xml).find("hash").text();
        var good = $(xml).find("good").text();
-       
+console.log( "cls:", cls, "name:", name, "log:", log, "date:", date, "col1:", col1, "col2:", col2, "img:", img, "hash:", hash, "good:", good);
+console.log($.cookie(jquery_chat_name));
+
+       var myname = $.cookie(jquery_chat_name);
+
        log = sanitize( log ); 
        
        log = getLink(log);
        var dstyle = '';
+
+/* ここから新構成 */
+
+       if(cls === 'li3'){
+         return html = '<li class="li3" id="'+hash+'">'+name+':'+log+'</li>';
+       }else if(cls === 'li4'){
+         return html = '<li class="li4" id="'+hash+'">'+log+'</li>';
+       }else{
+         if(myname === name){
+           // 本人
+           dstyle = ' style="text-align:right"';
+           if(img === 'IMG'){
+             // 本人で画像
+             var log = '<a href="upload/'+log+'" target="_blank"><img src="upload/thumbnail/'+log+'" /></a>';
+             return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+           }else if(img === 'STUMP'){
+             // 本人でスタンプ
+             var log = '<img src="stamp/img/'+log+'" />';
+             cls = 'li6';
+             return html = '<li class="liri" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+           }else if(img === 'GMAP'){
+             // 自分で位置
+             var log = '<a href="common/php/gmap.php?map='+log+'" target="_blank">I am here!</a>';
+             return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+           }else{
+             // 自分で発言
+             return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+           }
+         }else{
+           // 他人
+           if(img === 'IMG'){
+             // 他人で画像
+             var log = '<a href="upload/'+log+'" target="_blank"><img src="upload/thumbnail/'+log+'" /></a>';
+             return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+           }else if(img === 'STUMP'){
+             // 他人でスタンプ
+             var log = '<img src="stamp/img/'+log+'" />';
+             return html = '<li class="lili" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+           }else if(img === 'GMAP'){
+             // 他人で位置
+             var log = '<a href="common/php/gmap.php?map='+log+'" target="_blank">I am here!</a>';
+             return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+           }else{
+             // 他人で発言
+             return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+           }
+       }
+     } 
+
+/*
          if(cls === 'li3'){
            return html = '<li class="li3" id="'+hash+'">'+name+':'+log+'</li>';
          }
@@ -720,6 +775,7 @@ console.log(good, goodwho);
 		}
            }
          }
+*/
     }
 
 
@@ -859,6 +915,16 @@ console.log(good, goodwho);
          $("html, body").animate({ 
             scrollTop:pos 
          }, 1500, "swing");
+console.log("cs_top");
+    }
+    
+/*****************************************************
+ * 上へスライドする (追加)
+ *****************************************************/
+    function cs_down(){
+         $("html, body").animate({ 
+            scrollTop:0 
+         }, 100, "swing");
 console.log("cs_top");
     }
     

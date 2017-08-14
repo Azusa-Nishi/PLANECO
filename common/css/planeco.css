@@ -169,7 +169,7 @@ li{
   display: block;
 }
 
-.logr{
+.logl{
   position: relative;
   background: #85e249;
   margin: 5px;
@@ -182,10 +182,50 @@ li{
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
 }
+.logl:after,
+.logl:before {
+  background: #85e249;
+  left: 6px;
+  top: -4px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #85e249;
+  border-width: 6px;
+  margin-top: -1px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.logl span{
+  display: block;
+  font-size: 90%;
+  color: #93A9FC;
+}
+
+.logr{
+  position: relative;
+  background: #85e249;
+  margin: 5px;
+  padding: 5px;
+  padding-top: 10px;
+  border-radius: 15px;
+  margin-left: 20%;
+  clear: both;
+  max-width: 500px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
 .logr:after,
 .logr:before {
   background: #85e249;
-  left: 6px;
+  right: 6px;
   top: -4px;
   border: solid transparent;
   content: " ";
@@ -209,59 +249,24 @@ li{
   color: #93A9FC;
 }
 
-.logl{
-  position: relative;
-  background: #85e249;
-  margin: 5px;
-  padding: 5px;
-  padding-top: 10px;
-  border-radius: 15px;
-  margin-left: 20%;
-  clear: both;
-  max-width: 500px;
-  -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
-}
-.logl:after,
-.logl:before {
-  background: #85e249;
-  right: 6px;
-  top: -4px;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-color: rgba(255, 255, 255, 0);
-  border-bottom-color: #85e249;
-  border-width: 6px;
-  margin-top: -1px;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.li1{
+.lil{
   float:left;
 }
-.li2{
-  float:right
-}
-
-.li1 .name{
+.lil .name{
   float:left;
 }
-.li1 .log{
+.lil .log{
   float:left;
   margin-left:10px;
 }
-.li2 .name{
+
+.lir{
+  float:right
+}
+.lir .name{
   float:right;
 }
-.li2 .log{
+.lir .log{
   float:right;
   margin-right:10px;
 }
@@ -276,6 +281,7 @@ li{
 	margin-left: auto;
 	margin-right: auto;
 }
+
 .li4{
 	font-size: 90%;
 	background-color: #FFFFFF;
@@ -288,25 +294,25 @@ li{
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
 }
-
-.li5 .name{
-  float:left;
-}
-.li5 .log{
-  float:left;
-  background: none;
-}
-.li6 .name{
-  float:right;
-}
-.li6 .log{
-  float:right;
-  background: none;
-}
-
 .li4 .log{
   float:right;
   margin-right:10px;
+  background: none;
+}
+
+.lili .name{
+  float:left;
+}
+.lili .log{
+  float:left;
+  background: none;
+}
+
+.liri .name{
+  float:right;
+}
+.liri .log{
+  float:right;
   background: none;
 }
 
