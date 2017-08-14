@@ -490,7 +490,7 @@ console.log("LON:"+lon+" LAT:"+lat);
 /*****************************************************
  * いいね(新規作成)
  *****************************************************/
-      $(document).on('click','.li1,.li2,.li5,.li6',function(e){
+      $(document).on('click','.lil,.lir,.lili,.liri',function(e){
         var gid = $(this).attr("id");
 console.log("GOOD!:",gid);
         $.ajax({ type: "POST",url: "common/php/chat.php",data: "mode=good&room="+opt.room_id+"&hash="+gid+"&goodfrom="+$.cookie(jquery_chat_unique),
