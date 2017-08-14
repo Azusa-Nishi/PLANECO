@@ -655,7 +655,7 @@ console.log(good, goodwho);
  *****************************************************/
     function logRow(xml){
        var cls  = $(xml).find("cls").text();
-       var unq  = $(xml).find("unique").text();
+       var unq  = $(xml).find("unq").text();
        var name = $(xml).find("name").text();
        var log  = $(xml).find("log").text();
        var date = $(xml).find("date").text();
@@ -664,10 +664,8 @@ console.log(good, goodwho);
        var img  = $(xml).find("img").text();
        var hash = $(xml).find("hash").text();
        var good = $(xml).find("good").text();
-console.log( "cls:", cls, "unq", unq, "name:", name, "log:", log, "date:", date, "col1:", col1, "col2:", col2, "img:", img, "hash:", hash, "good:", good);
-console.log($.cookie(jquery_chat_name));
 
-       var myname = $.cookie(jquery_chat_name);
+       var myunq = $.cookie(jquery_chat_unique);
 
        log = sanitize( log ); 
        
@@ -681,7 +679,7 @@ console.log($.cookie(jquery_chat_name));
        }else if(cls === 'li4'){
          return html = '<li class="li4" id="'+hash+'">'+log+'</li>';
        }else{
-         if(myname === name){
+         if(myunq === unq){
            // 本人
            dstyle = ' style="text-align:right"';
            if(img === 'IMG'){
