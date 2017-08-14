@@ -501,12 +501,12 @@ console.log("LON:"+lon+" LAT:"+lat);
  *****************************************************/
       $(document).on('click','.lil,.lir,.lili,.liri',function(e){
         var gid = $(this).attr("id");
-console.log("GOOD!:",gid);
+//console.log("GOOD!:",gid);
         $.ajax({ type: "POST",url: "common/php/chat.php",data: "mode=good&room="+opt.room_id+"&hash="+gid+"&goodfrom="+$.cookie(jquery_chat_unique),
           success: function(xml){
            var good = $(xml).find("good").text();
            var goodwho = $(xml).find("goodwho").text();
-console.log(good, goodwho);
+//console.log(good, goodwho);
 // なんか星と数字とか飛ばすかいな。goodの数だけ
            }
         });
@@ -923,7 +923,7 @@ console.log(good, goodwho);
          $("html, body").animate({ 
             scrollTop:pos 
          }, 1500, "swing");
-console.log("cs_top");
+//console.log("cs_top");
     }
     
 /*****************************************************
