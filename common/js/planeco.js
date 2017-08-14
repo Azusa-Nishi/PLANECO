@@ -304,13 +304,22 @@ console.log("LON:"+lon+" LAT:"+lat);
         function errorCallback(error) {
           switch(error.code) {
             case 1:
-              $("#message").slideDown(200).text('位置情報の取得が許可されませんでした');
+              $("#message").slideDown(200).text('Location aquisition denied');
+              setTimeout(function(){
+                $('#message').slideUp(100).text("");
+              },3000);
               break;
             case 2:
-              $("#message").slideDown(200).text('位置情報の取得に失敗しました');
+              $("#message").slideDown(200).text('Location aquisition failed');
+              setTimeout(function(){
+                $('#message').slideUp(100).text("");
+              },3000);
               break;
             case 3:
-              $("#message").slideDown(200).text('タイムアウトしました');
+              $("#message").slideDown(200).text('Location aquisition timeout');
+              setTimeout(function(){
+                $('#message').slideUp(100).text("");
+              },3000);
               break;
           }
         }
@@ -655,7 +664,6 @@ console.log(good, goodwho);
  *****************************************************/
     function logRow(xml){
        var cls  = $(xml).find("cls").text();
-       var unq  = $(xml).find("unq").text();
        var name = $(xml).find("name").text();
        var log  = $(xml).find("log").text();
        var date = $(xml).find("date").text();
@@ -665,7 +673,7 @@ console.log(good, goodwho);
        var hash = $(xml).find("hash").text();
        var good = $(xml).find("good").text();
 
-       var myunq = $.cookie(jquery_chat_unique);
+       var myname = $.cookie(jquery_chat_name);
 
        log = sanitize( log ); 
        
@@ -679,7 +687,7 @@ console.log(good, goodwho);
        }else if(cls === 'li4'){
          return html = '<li class="li4" id="'+hash+'">'+log+'</li>';
        }else{
-         if(myunq === unq){
+         if(myname === name){
            // 本人
            dstyle = ' style="text-align:right"';
            if(img === 'IMG'){
@@ -843,7 +851,7 @@ console.log(good, goodwho);
           success: function(xml){
             var flag  = $(xml).find("flag").text()|0;
             if(flag === 1) {
-              readLog(true,'');
+              readLog(false,'');
               if(slide === 'on') cs_top();
             }
           }
@@ -940,9 +948,11 @@ console.log("cs_top");
         url: url,
         dataType: 'json',
         done: function (e, data) {
+console.log("index.php");
           $.each(data.result.files, function (index, file) {
-            $('<p/>').text(file.name).appendTo('#files');
             ufilename = file.name;
+console.log(ufilename);
+            $('<p/>').text(ufilename).appendTo('#files');
             chatupimg();
           });
         },
@@ -1066,6 +1076,9 @@ mt:false, mb:false, ml:false, mr:false, bl:false, br:false, tl:false, tr:false,
       url:'common/php/saveplanet.php',
       contentType: "Content-Type: application/json; charset=UTF-8",
       data: sdatas,
+      success: function(){
+console.log("saveplanet.php");
+	},
     }).fail(function(XMLHttpRequest, textStatus, errorThrown){
         alert(errorThrown);
     });
@@ -1114,6 +1127,7 @@ mt:false, mb:false, ml:false, mr:false, bl:false, br:false, tl:false, tr:false,
       type: 'POST',
       data: uidata,
       success: function(xml) {
+console.log("upload.php");
         var planetimage = $(xml).find("planetimage").text();
 console.log(planetimage);
         $.ajax({ type: "POST",
