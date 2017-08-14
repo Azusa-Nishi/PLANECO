@@ -687,7 +687,7 @@ console.log($.cookie(jquery_chat_name));
              // 本人で画像
              var log = '<a href="upload/'+log+'" target="_blank"><img src="upload/thumbnail/'+log+'" /></a>';
              return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-           }else if(img === 'STUMP'){
+           }else if(img === 'STAMP'){
              // 本人でスタンプ
              var log = '<img src="stamp/img/'+log+'" />';
              cls = 'li6';
@@ -706,7 +706,7 @@ console.log($.cookie(jquery_chat_name));
              // 他人で画像
              var log = '<a href="upload/'+log+'" target="_blank"><img src="upload/thumbnail/'+log+'" /></a>';
              return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-           }else if(img === 'STUMP'){
+           }else if(img === 'STAMP'){
              // 他人でスタンプ
              var log = '<img src="stamp/img/'+log+'" />';
              return html = '<li class="lili" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
@@ -744,7 +744,7 @@ console.log($.cookie(jquery_chat_name));
              return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
 		}
            }
-           else if(img === 'STUMP'){
+           else if(img === 'STAMP'){
              var log = '<img src="stamp/img/'+log+'" />';
              
              if(cls == 'li1'){

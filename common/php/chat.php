@@ -363,7 +363,7 @@ if(isset($_POST) AND is_array($_POST)){
           ,':remoote_addr' => $_SERVER["REMOTE_ADDR"]
           ,':name_color'   => $name_color
           ,':log_color'    => $log_color
-          ,':chat_type'    => 'STUMP'
+          ,':chat_type'    => 'STAMP'
           ,':created'      => date('Y-m-d')
       );
       
