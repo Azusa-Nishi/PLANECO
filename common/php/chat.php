@@ -43,7 +43,7 @@ define('write_limit',2); //0で無制限
 define('LEN',30);
 
 // 設定ここまで -------------------------------------------------------------------------------
-require_once('omikuzi.php'); //おみくじ設定ファイルを読み込む *内容を変更したい場合は参照して下さい
+require_once('quiz.php'); //おみくじ設定ファイルを読み込む *内容を変更したい場合は参照して下さい
 
 /******************************************
  * 変数定義とサニタイズ
@@ -203,6 +203,10 @@ if(isset($_POST) AND is_array($_POST)){
         $omikuzi = new Omikuzu;
         
         switch($log_str){
+          case '#quiz':
+            $data[':str']  = '[ECO Quiz Challenge] ';
+            $data[':str'] .= $omikuzi->Quiz();
+          break;
           case '#fortune':
             $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'\'s fortune] ';
             $data[':str'] .= $omikuzi->Nomal();
