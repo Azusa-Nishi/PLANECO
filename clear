@@ -1,5 +1,6 @@
 #!/bin/sh
-/bin/rm -rf upload/*
+/bin/rm -f upload/* 2> /dev/null
+/bin/rm -f upload/thumbnail/* 2> /dev/null
 cd db
 echo "delete from chat_log;" | sqlite3 chat2.sqlite
 cd ..
