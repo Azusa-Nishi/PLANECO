@@ -1089,6 +1089,10 @@ console.log("saveplanet.php");
   function uploadimage(){
     var pcanvas = document.getElementById('cv');
     var uidata = {};
+    canvas.setActiveObject(canvas.item(0));
+    canvas.item(0)['hasControls'] = false;
+    canvas.item(0)['hasBorders'] = false;
+    canvas.renderAll();
     var canvasData = pcanvas.toDataURL();
     canvasData = canvasData.replace(/^data:image\/png;base64,/, '');
     uidata.image = canvasData;
@@ -1116,7 +1120,7 @@ console.log(planetimage);
     });
   }
   function redrawjson(rflag){
-    $.getJSON(rfname, function(da) {
+    $.getJSON(rfname+"?"+(new Date().getTime()), function(da) {
       console.log("json:",rfname);
       var len = da.length;
       if((len <= 1)&&(rflag == true)){
@@ -1206,7 +1210,7 @@ console.log(planetimage);
     $('#'+val).on('click', function () {
       console.log("Called");
       $mc.masonry('remove', $mc.find('.item')).masonry('layout');
-      $.getJSON("img/"+val+"/files.json", function(data) {
+      $.getJSON("img/"+val+"/files.json"+"?"+(new Date().getTime()), function(data) {
 	console.log("OK load");
         $.each(data, function(){
 		  var $item = $('<div class="item"><img src="img/'+val+'/'+this+'"/></div>');
