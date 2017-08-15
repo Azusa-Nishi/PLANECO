@@ -3,4 +3,10 @@
 cd db
 echo "delete from chat_log;" | sqlite3 chat2.sqlite
 cd ..
+myhost=`hostname`
+echo $myhost
+if [ $myhost = 'pegasus.west.home' ]; then
+chown apache.apache -R *
+else
 chown www-data.www-data -R *
+fi
