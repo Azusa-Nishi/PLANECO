@@ -4,5 +4,5 @@
 cat files.json.1 | sed -e 's/^/["/' > files.json.2
 cat files.json.2 | sed -e 's/$/"],/' > files.json.3
 echo "["
-cat files.json.3
+cat files.json.3 | sed -e '$s/,$//'
 echo "]"
