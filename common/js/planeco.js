@@ -625,7 +625,8 @@ console.log("LON:"+lon+" LAT:"+lat);
             }
             if(val === '#help'){
               var str  = '<li class="li3" id="setumei">';
-                  str += '[#theme]<br />Background color will be changed randomly.<br />';
+				  str += '[#quiz]<br />Challenge to an ECO quiz.<br />';
+                  str += '[#theme]<br />Background color will change randomly.<br />';
                   str += '[#fortune]<br />Draw a fortune slip<br />';
                   str += '[#health]<br />Draw a fortune slip of health.<br />';
                   str += '[#love]<br />Draw a fortune slip of love.<br />';
@@ -636,7 +637,7 @@ console.log("LON:"+lon+" LAT:"+lat);
                   return ;
             }
             var kuzi = '';
-            if(val === '#fortune' || val === '#health' || val === '#love'){
+            if(val === '#fortune' || val === '#health' || val === '#love' || val === '#quiz'){
               kuzi = val;
             }
               
@@ -1003,13 +1004,19 @@ console.log(ufilename);
       var Theme = new Array;
       Theme[0] = {'bgcolor':'#BCFFCE' , 'bgimage':'none' };
       Theme[1] = {'bgcolor':'#ffc0cb' , 'bgimage':'none' };
-      Theme[2] = {'bgcolor':'#98fb98' , 'bgimage':'url(common/images/planeco-icon.png)' };
-      Theme[3] = {'bgcolor':'#db7093' , 'bgimage':'url(common/images/moon.png)' };
-      Theme[4] = {'bgcolor':'#a9a9a9' , 'bgimage':'url(common/images/nodata.png)' };
-      Theme[5] = {'bgcolor':'#e6e6fa' , 'bgimage':'url(common/images/planet.png)' };
-      Theme[6] = {'bgcolor':'#bdb76b' , 'bgimage':'url(common/images/originalplanet.png)' };
+      Theme[2] = {'bgcolor':'#98fb98' , 'bgimage':'none' };
+      Theme[3] = {'bgcolor':'#db7093' , 'bgimage':'none' };
+      Theme[4] = {'bgcolor':'#a9a9a9' , 'bgimage':'none' };
+      Theme[5] = {'bgcolor':'#e6e6fa' , 'bgimage':'none' };
+      Theme[6] = {'bgcolor':'#bdb76b' , 'bgimage':'none' };
       Theme[7] = {'bgcolor':'#f0fff0' , 'bgimage':'none' };
-      Theme[8] = {'bgcolor':'#778899' , 'bgimage':'url(common/images/planet.png)' };
+      Theme[8] = {'bgcolor':'#778899' , 'bgimage':'none' };
+      Theme[9] = {'bgcolor':'#3cb371' , 'bgimage':'none' };
+      Theme[10] = {'bgcolor':'#dda0dd' , 'bgimage':'none' };
+      Theme[11] = {'bgcolor':'#9370db' , 'bgimage':'none' };
+      Theme[12] = {'forbgcolor':'#f0ffff' , 'bgimage':'none' };
+      Theme[13] = {'bgcolor':'#800000' , 'bgimage':'none' };
+      Theme[14] = {'bgcolor':'#f8e58c' , 'bgimage':'none' };
       var n = Math.ceil( Math.random()*(Theme.length));
       var set_Theme = Theme[n];
       if(!set_Theme) set_Theme = Theme[0];
