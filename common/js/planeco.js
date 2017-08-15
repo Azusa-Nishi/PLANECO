@@ -741,7 +741,7 @@ console.log("LON:"+lon+" LAT:"+lat);
     $(document).on("click", ".quiz", function () {
       $.confirm({
         title: 'Answer',
-        content: '<img src="common/images/planeco-icon.png" width="64"><br><span class="quizans">'+$(this).val()+'</span>',
+        content: '<img src="common/images/planeco-icon-mini.png" width="64"><br><span class="quizans">'+$(this).val()+'</span>',
         buttons: {
           confirm: {
             text: 'CLOSE'

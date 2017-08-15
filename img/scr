@@ -1,5 +1,5 @@
 #!/bin/sh
-cp */resize/*.png .
+#cp */resize/*.png .
 /bin/ls *.png > files.json.1
 cat files.json.1 | sed -e 's/^/["/' > files.json.2
 cat files.json.2 | sed -e 's/$/"],/' > files.json.3
