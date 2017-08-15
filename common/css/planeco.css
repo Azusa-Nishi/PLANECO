@@ -483,6 +483,19 @@ button {
   margin: 0px 5px 10px 5px;
 }
 
+button.quiz {
+  text-shadow: none;
+  box-shadow: 1px 1px 2px 0px #666;
+  -moz-box-shadow: 1px 1px 2px 0px #666;
+  -webkit-box-shadow: 1px 1px 2px 0px #666;
+  font-size: 1em;
+  padding: 2px 5px;
+  background-color: #ddd;
+  color: #000;
+  border-style: none;
+  margin: 0px 5px 10px 5px;
+}
+
 #button {
   text-align: left;
 }
@@ -582,3 +595,32 @@ body > #container > #nurturewin > #fileswin {
   display: block;
 }
 
+.quizans {
+  position: relative;
+  display: inline-block;
+  margin: 5px 0;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #555;
+  font-size: 16px;
+  background: #85e249;
+  border-radius: 15px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+
+.quizans:before{
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 20px;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-bottom: 15px solid #85e249;
+}
+
+.quizans p {
+  margin: 0;
+  padding: 0;
+}

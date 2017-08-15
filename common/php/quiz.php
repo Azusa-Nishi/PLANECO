@@ -97,33 +97,32 @@ class Omikuzu{
  */
   public function Quiz(){
     $array = array(
-        'In this 100 years, how much degree centigrade increased in Japan? <about 1℃>'
-       ,'What is the main reason of global warming? <Greenhouse effect gas e.g. CO2>'
-       ,'What do you call the action when your car automatically shuts down it\'s engine when stopping? <Start-stop system>'
-       ,'What is one of the most CO2 discharging aroud your house apart electric appliances and lights? <cars>'
-       ,'How long does the CO2 last in air that is discharged today? <about 50 to 200 years>'
-       ,'What makes a hybrid car move? <Gasoline and electricity>'
-       ,'What historical event made the CO2 in the atmosphere increase? <The Industorial Revolution in the 1800s>'
-       ,'What happens if the Greenhouse effect gas increases in the atmosphere? <The Earth gets warmer> '
-       ,'How many percent of the creatures living today will extinct if the Earth gets 2℃ warmer? <25%>'
-       ,'What are the 3Rs? <Reduce, Reuse, Recycle>'
-       ,'What is the right thing to do if you want to get rid of your old PC? <Recycle it>'
-       ,'What is plastic made of? <Oil>'
-       ,'What do you call a car that moves using sunlight? <Solar cars>'
-       ,'What is used for Biomass energy? <Animal feces>'
-       ,'How many species are extincting in a year today? <40 thausand in a year>'
-       ,'What is the aim of the Ramsar Convention? <To protect the bogs around the world>'
-       ,'What destroys the Ozone layer? <Freon gas>'
-       ,'what does the Ozone Layer do? <It protects us from the ultraviolet rays>'
-       ,'What do you call a metropolitan area that is warmer than it\'s surroundings? <Urban heat island>'
-       ,'Where did the word "ECO" born? <Japan>'
-       ,'What greenhouse gas makes the most increase of the tempreture on Earth? <CO2>'
-       ,'Where in a house descharges the most contaminated water? <In the kitchen>'
+        'In this 100 years, how much degree centigrade increased in Japan?|about 1'
+       ,'What is the main reason of global warming?|Greenhouse effect gas e.g. CO2'
+       ,'What do you call the action when your car automatically shuts down it\'s engine when stopping?|Start-stop system'
+       ,'What is one of the most CO2 discharging aroud your house apart electric appliances and lights?|cars'
+       ,'How long does the CO2 last in air that is discharged today?|about 50 to 200 years'
+       ,'What makes a hybrid car move?|Gasoline and electricity'
+       ,'What historical event made the CO2 in the atmosphere increase?|The Industorial Revolution in the 1800s'
+       ,'What happens if the Greenhouse effect gas increases in the atmosphere?|The Earth gets warmer '
+       ,'How many percent of the creatures living today will extinct if the Earth gets 2℃ warmer?|25%'
+       ,'What are the 3Rs?|Reduce, Reuse, Recycle'
+       ,'What is the right thing to do if you want to get rid of your old PC?|Recycle it'
+       ,'What is plastic made of?|Oil'
+       ,'What do you call a car that moves using sunlight?|Solar cars'
+       ,'What is used for Biomass energy?|Animal feces'
+       ,'How many species are extincting in a year today?|40 thausand in a year'
+       ,'What is the aim of the Ramsar Convention?|To protect the bogs around the world'
+       ,'What destroys the Ozone layer?|Freon gas'
+       ,'what does the Ozone Layer do?|It protects us from the ultraviolet rays'
+       ,'What do you call a metropolitan area that is warmer than it\'s surroundings?|Urban heat island'
+       ,'Where did the word "ECO" born?|Japan'
+       ,'What greenhouse gas makes the most increase of the tempreture on Earth?|CO2'
+       ,'Where in a house descharges the most contaminated water?|In the kitchen'
     );
     
     $cnt = count($array) - 1;
     $rnd = mt_rand(0, $cnt );
     return $array[$rnd];
   }
- 
 }

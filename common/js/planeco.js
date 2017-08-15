@@ -664,129 +664,91 @@ console.log("LON:"+lon+" LAT:"+lat);
  * ログ配列(画像表示のため改変)
  *****************************************************/
     function logRow(xml){
-       var cls  = $(xml).find("cls").text();
-       var unq  = $(xml).find("unq").text();
-       var name = $(xml).find("name").text();
-       var log  = $(xml).find("log").text();
-       var date = $(xml).find("date").text();
-       var col1 = $(xml).find("col1").text();
-       var col2 = $(xml).find("col2").text();
-       var img  = $(xml).find("img").text();
-       var hash = $(xml).find("hash").text();
-       var good = $(xml).find("good").text();
+      var cls  = $(xml).find("cls").text();
+      var unq  = $(xml).find("unq").text();
+      var name = $(xml).find("name").text();
+      var log  = $(xml).find("log").text();
+      var date = $(xml).find("date").text();
+      var col1 = $(xml).find("col1").text();
+      var col2 = $(xml).find("col2").text();
+      var img  = $(xml).find("img").text();
+      var hash = $(xml).find("hash").text();
+      var good = $(xml).find("good").text();
 
-       var myunq = $.cookie(jquery_chat_unique);
+      var myunq = $.cookie(jquery_chat_unique);
 
-       log = sanitize( log ); 
-       
-       log = getLink(log);
-       var dstyle = '';
+      log = sanitize( log ); 
+      
+      log = getLink(log);
+      var dstyle = '';
 
 /* ここから新構成 */
 
-       if(cls === 'li3'){
-         return html = '<li class="li3" id="'+hash+'">'+name+':'+log+'</li>';
-       }else if(cls === 'li4'){
-         return html = '<li class="li4" id="'+hash+'">'+log+'</li>';
-       }else{
-         if(myunq === unq){
-           // 本人
-           dstyle = ' style="text-align:right"';
-           if(img === 'IMG'){
-             // 本人で画像
-             var log = '<a href="upload/'+log+'" target="_blank"><img src="upload/thumbnail/'+log+'" /></a>';
-             return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+      if(cls === 'li3'){
+        return html = '<li class="li3" id="'+hash+'">'+name+':'+log+'</li>';
+      }else if(cls === 'li4'){
+        var mlog = log.split('|');
+        if(mlog[1]){
+          var log = mlog[0]+'<button class="quiz" name="Ans" value="'+mlog[1]+'">Ans</button>';
+        }else{
+          var log = mlog[0];
+        }
+        return html = '<li class="li4" id="'+hash+'">'+log+'</li>';
+      }else{
+        if(myunq === unq){
+          // 本人
+          dstyle = ' style="text-align:right"';
+          if(img === 'IMG'){
+            // 本人で画像
+            var log = '<a href="upload/'+log+'" target="_blank"><img src="upload/thumbnail/'+log+'" /></a>';
+            return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
            }else if(img === 'STAMP'){
-             // 本人でスタンプ
-             var log = '<img src="stamp/img/'+log+'" />';
-             cls = 'li6';
-             return html = '<li class="liri" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-           }else if(img === 'GMAP'){
-             // 自分で位置
-             var log = '<a href="common/php/gmap.php?map='+log+'" target="_blank">I am here!</a>';
-             return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-           }else{
-             // 自分で発言
-             return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-           }
-         }else{
-           // 他人
-           if(img === 'IMG'){
-             // 他人で画像
-             var log = '<a href="upload/'+log+'" target="_blank"><img src="upload/thumbnail/'+log+'" /></a>';
-             return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-           }else if(img === 'STAMP'){
-             // 他人でスタンプ
-             var log = '<img src="stamp/img/'+log+'" />';
-             return html = '<li class="lili" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-           }else if(img === 'GMAP'){
-             // 他人で位置
-             var log = '<a href="common/php/gmap.php?map='+log+'" target="_blank">I am here!</a>';
-             return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-           }else{
-             // 他人で発言
-             return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-           }
-       }
-     } 
+            // 本人でスタンプ
+            var log = '<img src="stamp/img/'+log+'" />';
+            cls = 'li6';
+            return html = '<li class="liri" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+          }else if(img === 'GMAP'){
+            // 自分で位置
+            var log = '<a href="common/php/gmap.php?map='+log+'" target="_blank">I am here!</a>';
+            return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+          }else{
+            // 自分で発言
+            return html = '<li class="lir" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+          }
+        }else{
+          // 他人
+          if(img === 'IMG'){
+            // 他人で画像
+            var log = '<a href="upload/'+log+'" target="_blank"><img src="upload/thumbnail/'+log+'" /></a>';
+            return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+          }else if(img === 'STAMP'){
+            // 他人でスタンプ
+            var log = '<img src="stamp/img/'+log+'" />';
+            return html = '<li class="lili" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+          }else if(img === 'GMAP'){
+            // 他人で位置
+            var log = '<a href="common/php/gmap.php?map='+log+'" target="_blank">I am here!</a>';
+            return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+          }else{
+            // 他人で発言
+            return html = '<li class="lil" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
+          }
+        }
+      } 
 
-/*
-         if(cls === 'li3'){
-           return html = '<li class="li3" id="'+hash+'">'+name+':'+log+'</li>';
-         }
-         else if(cls === 'li4'){
-           return html = '<li class="li4" id="'+hash+'">'+log+'</li>';
-         }
-         else{
-           
-             if(cls == 'li1'){
-
-             }else{
-               dstyle = ' style="text-align:right"';
-             }
-           
-           if(img === 'IMG'){
-             var log = '<a href="upload/'+log+'" target="_blank"><img src="upload/thumbnail/'+log+'" /></a>';
-		if(cls == "li1"){
-             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-		}else{
-             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-		}
-           }
-           else if(img === 'STAMP'){
-             var log = '<img src="stamp/img/'+log+'" />';
-             
-             if(cls == 'li1'){
-               cls = 'li5';
-             }else{
-               cls = 'li6';
-               
-             }
-		if(cls == "li1"){
-             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-		}else{
-             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-		}
-           }
-           else if(img === 'GMAP'){
-             var log = '<a href="common/php/gmap.php?map='+log+'" target="_blank">I am here!</a>';
-		if(cls == "li1"){
-             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-		}else{
-             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-		}
-           }
-           else{
-		if(cls == "li1"){
-             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logr" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-		}else{
-             return html = '<li class="'+cls+'" id="'+hash+'"><p class="name" style="color:'+col1+'">'+name+'/'+good+'Gd</p><p class="logl" style="color:'+col2+'">'+log+'<span'+dstyle+'>'+date+'</span></p></li>';
-		}
-           }
-         }
-*/
     }
 
+    $(document).on("click", ".quiz", function () {
+      $.confirm({
+        title: 'Answer',
+        content: '<img src="common/images/planeco-icon.png" width="64"><br><span class="quizans">'+$(this).val()+'</span>',
+        buttons: {
+          confirm: {
+            text: 'CLOSE'
+          }
+        }
+      });
+    });
 
 /*****************************************************
  * ログの書き変えと追加
