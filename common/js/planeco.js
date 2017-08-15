@@ -625,7 +625,7 @@ console.log("LON:"+lon+" LAT:"+lat);
             }
             if(val === '#help'){
               var str  = '<li class="li3" id="setumei">';
-				  str += '[#quiz]<br />Challenge to an ECO quiz.<br />';
+				  str += '[#quiz]<br />Challenge to an ECO quiz.Planeco will teach you the answer!<br />';
                   str += '[#theme]<br />Background color will change randomly.<br />';
                   str += '[#fortune]<br />Draw a fortune slip<br />';
                   str += '[#health]<br />Draw a fortune slip of health.<br />';
