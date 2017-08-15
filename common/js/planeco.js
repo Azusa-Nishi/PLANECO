@@ -1209,7 +1209,7 @@ console.log(planetimage);
       $.getJSON("img/"+val+"/files.json", function(data) {
 	console.log("OK load");
         $.each(data, function(){
-          var $item = $('<div class="item"><img src="img/'+val+'/'+this+'"/></div>');
+		  var $item = $('<div class="item"><img src="img/'+val+'/'+this+'"/></div>');
           $mc.append($item).masonry('appended', $item).masonry('layout');
         })
       })
