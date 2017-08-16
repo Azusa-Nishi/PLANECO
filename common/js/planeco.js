@@ -1012,7 +1012,7 @@ $(document).ready(function(){
   fabric.Group.prototype.lockScalingY = true; // グループでスケール禁止
 
   function putbimg(fname){
-    console.log("putbimg:", fname);
+console.log("putbimg:", fname);
     fabric.Image.fromURL(fname, function(pe){
       pe.set({selectable: false});
       canvas.add(pe);
@@ -1023,7 +1023,7 @@ $(document).ready(function(){
     });
   }
   function putfimg(fname, lp, tp, ap){
-    console.log("putfimg:", fname);
+console.log("putfimg:", fname);
     fabric.Image.fromURL(fname, function(pe){
       pe.setControlsVisibility({
 mt:false, mb:false, ml:false, mr:false, bl:false, br:false, tl:false, tr:false,
@@ -1040,7 +1040,7 @@ mt:false, mb:false, ml:false, mr:false, bl:false, br:false, tl:false, tr:false,
   }
   function savejsdata(sdata){
     var sdatas = JSON.stringify(sdata);
-    console.log(sdatas);
+console.log(sdatas);
     $.ajax({
       type:'POST',
       url:'common/php/saveplanet.php',
@@ -1071,7 +1071,7 @@ console.log("saveplanet.php");
             pdent.img = fname[fname.length-2]+"/"+fname[fname.length-1];
             pdata.push(pdent);
           }
-        console.log(o.get("type"), ",", fname[fname.length-1]);
+console.log(o.get("type"), ",", fname[fname.length-1]);
 	}
       }
       loop++;
@@ -1081,10 +1081,21 @@ console.log("saveplanet.php");
     return loop;
   }
   function saveimage(){
+    var obj = canvas.getActiveObject();
+    if(obj){
+      obj['hasControls'] = false;
+      obj['hasBorders'] = false;
+      canvas.renderAll();
+    }
     var pcanvas = document.getElementById('cv');
     pcanvas.toBlob(function(blob) {
       saveAs(blob, "yourplanetimage.png");
     },"image/pg");
+    if(obj){
+      obj['hasControls'] = true;
+      obj['hasBorders'] = true;
+      canvas.renderAll();
+    }
   }
   function uploadimage(){
     var obj = canvas.getActiveObject();
@@ -1110,15 +1121,11 @@ console.log("saveplanet.php");
       success: function(xml) {
 console.log("upload.php");
         var planetimage = $(xml).find("planetimage").text();
-console.log(planetimage);
         $.ajax({ type: "POST",
           url: "common/php/chat.php",
           data: "mode=file&room="+roomid+"&file="+planetimage,
           success: function(xml){
-/*
-            readLog(true,'');
-            cs_top();
-*/
+console.log(planetimage);
           }
         });
       },
@@ -1128,10 +1135,10 @@ console.log(planetimage);
   }
   function redrawjson(rflag){
     $.getJSON(rfname+"?"+(new Date().getTime()), function(da) {
-      console.log("json:",rfname);
+console.log("json:",rfname);
       var len = da.length;
       if((len <= 1)&&(rflag == true)){
-        console.log("no data:"+rfname);
+console.log("no data:"+rfname);
         putbimg('common/images/nodata.png');
       }else{
         putbimg('common/images/originalplanet.png');
@@ -1146,7 +1153,7 @@ console.log(planetimage);
       if(rflag == false){
         putbimg('common/images/originalplanet.png');
       }else{
-        console.log("no file:"+rfname);
+console.log("no file:"+rfname);
         putbimg('common/images/nodata.png');
       }
     });
@@ -1157,7 +1164,7 @@ console.log(planetimage);
     if($.cookie(jquery_chat_unique) !== 'undefined'){
       rfname = "save/planet"+$.cookie(jquery_chat_unique)+".json";
         $.when(redrawjson(rflag)).done(function() {
-          console.log("redraw-fin");
+  console.log("redraw-fin");
       });
     }
   }
@@ -1215,10 +1222,10 @@ console.log(planetimage);
   });
   function setbtn(val){
     $('#'+val).on('click', function () {
-      console.log("Called");
+console.log("Called");
       $mc.masonry('remove', $mc.find('.item')).masonry('layout');
       $.getJSON("img/"+val+"/files.json"+"?"+(new Date().getTime()), function(data) {
-	console.log("OK load");
+console.log("OK load");
         $.each(data, function(){
 		  var $item = $('<div class="item"><img src="img/'+val+'/'+this+'"/></div>');
           $mc.append($item).masonry('appended', $item).masonry('layout');
@@ -1231,7 +1238,7 @@ console.log(planetimage);
     if(imgsrc = event.target.src){
       var fname = imgsrc.split('/');
       var filen = fname[fname.length-2]+'/'+fname[fname.length-1];
-      console.log(filen);
+console.log(filen);
       var pdent = new Object();
       pdent.left = 64;
       pdent.top = 64;
@@ -1245,7 +1252,7 @@ console.log(planetimage);
           $('#nurturemessage').text("");
         },2000);
       }else{
-        console.log("allcost:"+allcost);
+console.log("allcost:"+allcost);
         if(parseInt(allcost) == 0){
           redraw(false);
         }
