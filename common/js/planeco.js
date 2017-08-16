@@ -1087,15 +1087,22 @@ console.log("saveplanet.php");
     },"image/pg");
   }
   function uploadimage(){
+    var obj = canvas.getActiveObject();
+    if(obj){
+      obj['hasControls'] = false;
+      obj['hasBorders'] = false;
+      canvas.renderAll();
+    }
     var pcanvas = document.getElementById('cv');
     var uidata = {};
-    canvas.setActiveObject(canvas.item(0));
-    canvas.item(0)['hasControls'] = false;
-    canvas.item(0)['hasBorders'] = false;
-    canvas.renderAll();
     var canvasData = pcanvas.toDataURL();
     canvasData = canvasData.replace(/^data:image\/png;base64,/, '');
     uidata.image = canvasData;
+    if(obj){
+      obj['hasControls'] = true;
+      obj['hasBorders'] = true;
+      canvas.renderAll();
+    }
     $.ajax({
       url: 'common/php/upload.php',
       type: 'POST',
@@ -1255,14 +1262,6 @@ console.log(planetimage);
       }
     };
   });
-
-/*
-  $(function(){
-    setTimeout(function(){
-      redraw(true);
-    },1000);
-  });
-*/
   $(document).ready(function(){
     redraw(true);
   });
