@@ -408,6 +408,9 @@ console.log("LON:"+lon+" LAT:"+lat);
                   cs_top();
                 }else{
                   $("#message").slideDown(200).text(limit);
+                  setTimeout(function(){
+                    $('#message').slideUp(100).text("");
+                  },3000);
                 }
               }
           });
@@ -650,6 +653,9 @@ console.log("LON:"+lon+" LAT:"+lat);
                   cs_top();
                 }else{
                   $("#message").slideDown(200).text(limit);
+                  setTimeout(function(){
+                    $('#message').slideUp(100).text("");
+                  },3000);
                 }
                 
               }
