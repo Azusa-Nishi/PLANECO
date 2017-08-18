@@ -19,7 +19,7 @@ $info = explode(',',$_GET['map']);
       }
 
 </style>
-<script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyDOga-N5vE5AMG1N_ocujb62Xb5Nvr9qvY"></script>
 <script>
 var map;
 function initialize() {

@@ -10,4 +10,5 @@ if [ $myhost = 'pegasus.west.home' ]; then
 chown apache.apache -R *
 else
 chown www-data.www-data -R *
+chmod ug+w -R *
 fi
