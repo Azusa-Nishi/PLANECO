@@ -37,7 +37,8 @@ jQuery.event.add(window,"load",function() {
         'cmdmes'     : 'Wrong command',
         'flaggmap'   : false,
         'gmap'       : 'Your global position will be revealed. Is is Ok?',
-        'color'      : 'FF0004,0A00FF,FF00D6,2B9700,FF7600,666666'
+        'color'      : 'FF0004,0A00FF,FF00D6,2B9700,FF7600,666666',
+        'terms'      : '- You can not post statements, images, contrary to public order and morals, or content prohibited by law.<br>- Inappropriate posting is subject to deletion and subject to access restriction by Web Coockie and IP address.'
     }, options);
 
 /*
@@ -537,17 +538,28 @@ console.log("LON:"+lon+" LAT:"+lat);
   /* 入室時 (名前送信) 
    *------------------------------------*/
         if($(this).text() === opt.bt_name){
-
-          if( val ){
-            $.cookie(jquery_chat_name, val, { expires: 7 }); //名前をcookieに記録
-            $("#var").val(''); //inputを空に
-            $("#form a").text(opt.bt_chat); //ボタンを変更
-            $("#var").attr("maxlength","500"); //maxlengthを変更
-            if(opt.log_login === true) logWrite(val,null);
-          }else{
-            $("#var").val('');
-            $("#message").slideDown(200).text(opt.err_name);//空の場合はエラー
-          }
+          $.confirm({
+            title: 'Terms of service',
+            content: '<img src="common/images/planeco-icon-mini.png" width="64"><br><span class="quizans">'+opt.terms+'</span>',
+            buttons: {
+              confirm: function () {
+                text: 'Accept'
+                  if( val ){
+                    $.cookie(jquery_chat_name, val, { expires: 7 }); //名前をcookieに記録
+                    $("#var").val(''); //inputを空に
+                    $("#form a").text(opt.bt_chat); //ボタンを変更
+                    $("#var").attr("maxlength","500"); //maxlengthを変更
+                    if(opt.log_login === true) logWrite(val,null);
+                  }else{
+                    $("#var").val('');
+                    $("#message").slideDown(200).text(opt.err_name);//空の場合はエラー
+                  }
+              },
+              cancel: function () {
+                  text: 'Ignore'
+              },
+            }
+          });
         }
   /* チャット送信!!
    *------------------------------------*/
