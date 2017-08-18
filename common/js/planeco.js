@@ -26,10 +26,10 @@ jQuery.event.add(window,"load",function() {
         'log_login'  : true,
         'log_logof'  : true,
         'bt_name'    : 'Send your name',
-        'bt_chat'    : 'Write msssage',
-        'mes_logout' : 'Do you leave Planeco?',
-        'err_name'   : 'What your name?',
-        'err_upload' : 'Failed to upload',
+        'bt_chat'    : 'Write message',
+        'mes_logout' : 'Are you going to leave Planeco?',
+        'err_name'   : 'What is your name?',
+        'err_upload' : 'Fail to upload',
         'err_write'  : 'No message to write',
         'err_wnig'   : 'Error!!',
         'login'      : ' joined to Planeco',
@@ -250,6 +250,10 @@ var html = '';
             content: opt.mes_logout,
             buttons: {
               confirm: function () {
+				$("#planetwin").slideUp(600);
+                $("#nurturewin").slideUp(600);
+                $("#chat").slideDown(600);
+                $("#log").slideDown(600);
                 logWrite(null,true);
               },
                 cancel: function () {
