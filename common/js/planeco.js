@@ -255,6 +255,11 @@ var html = '';
                 $("#chat").slideDown(600);
                 $("#log").slideDown(600);
                 logWrite(null,true);
+                $.removeCookie(jquery_chat_name);
+                $.removeCookie(jquery_chat_unique);
+console.log("Logout");
+                $("#form a").text(opt.bt_name);
+                location.href=location.href;
               },
                 cancel: function () {
               },
@@ -603,15 +608,9 @@ console.log("LON:"+lon+" LAT:"+lat);
               success: function(xml){
                 readLog(true,'');
                 cs_top();
-                $.removeCookie(jquery_chat_name);
-                $.removeCookie(jquery_chat_unique);
-                location.href=location.href;
               }
           });
         }else{
-            $.removeCookie(jquery_chat_name);
-            $.removeCookie(jquery_chat_unique);
-            location.href=location.href;
         }
       }
 
