@@ -6,7 +6,6 @@
  * MIT License
  */
 
-
 /*
  * loading
  */
@@ -16,6 +15,11 @@ jQuery.event.add(window,"load",function() {
     jQuery("#container").css("display", "block");
 });
 
+var allgood = 0;
+var allcost = 0;
+var allitem = 0;
+var ufilename = "";
+$pcanvas = $('#planetcanvas');
 
 (function($){
   $.fn.jqueryChat = function(options) {
@@ -77,7 +81,6 @@ jQuery.event.add(window,"load",function() {
  *****************************************************/
     $.ajax({ type: "POST",url: "common/php/chat.php",data: "mode=db_check&room="+opt.room_id,
         success: function(xml){
-          
           var error = $(xml).find("error").text();
           if(error){
             $("#log").html('<span style="color:red;font-size:90%">Cannot connect Database<br />'+error+'</span>');
@@ -154,7 +157,6 @@ var html = '';
           html +='  </div>';
           html +='  <div id="files" class="files"></div>';
           html +='</div>';
-
           $(this).after(html);
 
   /* ログ移動位置
@@ -266,10 +268,11 @@ var html = '';
             content: opt.mes_logout,
             buttons: {
               confirm: function () {
-				$("#planetwin").slideUp(600);
+                $("#planetwin").slideUp(600);
                 $("#nurturewin").slideUp(600);
                 $("#chat").slideDown(600);
                 $("#log").slideDown(600);
+                redraw(true);
                 logWrite(null,true);
                 $.removeCookie(jquery_chat_name);
                 $.removeCookie(jquery_chat_unique);
@@ -323,7 +326,6 @@ console.log("LON:"+lon+" LAT:"+lat);
                   }
               });
           }
-          
         }
         function errorCallback(error) {
           switch(error.code) {
@@ -947,7 +949,6 @@ console.log(ufilename);
     $('#fileupload').bind('fileuploadsubmit', function (e, data) {
       data.formData = {"file" : ufilename};
     });
-  };
 
   /* 
    * サニタイズ
@@ -990,284 +991,274 @@ console.log(ufilename);
         $("#container").css({"background-image":set_Theme.bgimage});
       }
     }
-})(jQuery);
-
-var allgood = 0;
-var allcost = 0;
-var allitem = 0;
-var ufilename = "";
-
-(function($){
-$pcanvas = $('#planetcanvas');
-$(document).ready(function(){
-  zIndex = 100;
-  var canvas = new fabric.Canvas('cv');
-  var selo;
-  var rfname;
-  var be;
-  fabric.Group.prototype.lockScalingX = true;
-  fabric.Group.prototype.lockScalingY = true; // グループでスケール禁止
-
-  function putbimg(fname){
-console.log("putbimg:", fname);
-    fabric.Image.fromURL(fname, function(pe){
-      pe.set({selectable: false});
-      canvas.add(pe);
-      canvas.sendToBack(pe).renderAll();
-    },{
-      left: 80,
-      top: 120,
-    });
-  }
-  function putfimg(fname, lp, tp, ap){
-console.log("putfimg:", fname);
-    fabric.Image.fromURL(fname, function(pe){
-      pe.setControlsVisibility({
-mt:false, mb:false, ml:false, mr:false, bl:false, br:false, tl:false, tr:false,
-        mtr: true,
+    zIndex = 100;
+    var canvas = new fabric.Canvas('cv');
+    var selo;
+    var rfname;
+    var be;
+    fabric.Group.prototype.lockScalingX = true;
+    fabric.Group.prototype.lockScalingY = true; // グループでスケール禁止
+  
+    function putbimg(fname){
+  console.log("putbimg:", fname);
+      fabric.Image.fromURL(fname, function(pe){
+        pe.set({selectable: false});
+        canvas.add(pe);
+        canvas.sendToBack(pe).renderAll();
+      },{
+        left: 80,
+        top: 120,
       });
-      canvas.add(pe);
-      canvas.renderAll();
-    },{
-      cornerSize: 40,
-      left: lp,
-      top: tp,
-      angle: ap,
-    });
-  }
-  function savejsdata(sdata){
-    var sdatas = JSON.stringify(sdata);
-console.log(sdatas);
-    $.ajax({
-      type:'POST',
-      url:'common/php/saveplanet.php',
-      contentType: "Content-Type: application/json; charset=UTF-8",
-      data: sdatas,
-      success: function(){
-console.log("saveplanet.php");
-	},
-    }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-        alert(errorThrown);
-    });
-  }
-  function savedata(ndata){
-    var loop = 0;
-    var pdata = new Array();
-    var cunique = $.cookie(jquery_chat_unique);
-    pdata.push({unique:cunique});
-    var objs = canvas.getObjects().map(function(o){
-      if (o.get("type") == "image"){
-	if(o._originalElement){
-          var pdent = new Object();
-          var imgsrc = o._originalElement.currentSrc;
-          var fname = imgsrc.split('/');
-          if(fname[fname.length-3] == "img"){
-            pdent.left = o.left;
-            pdent.top = o.top;
-            pdent.angle = o.angle;
-            pdent.img = fname[fname.length-2]+"/"+fname[fname.length-1];
-            pdata.push(pdent);
-          }
-console.log(o.get("type"), ",", fname[fname.length-1]);
-	}
-      }
-      loop++;
-    });
-    if(ndata){ pdata.push(ndata); }
-    savejsdata(pdata);
-    return loop;
-  }
-  function saveimage(){
-    var obj = canvas.getActiveObject();
-    if(obj){
-      obj['hasControls'] = false;
-      obj['hasBorders'] = false;
-      canvas.renderAll();
     }
-    var pcanvas = document.getElementById('cv');
-    pcanvas.toBlob(function(blob) {
-      saveAs(blob, "yourplanetimage.png");
-    },"image/pg");
-    if(obj){
-      obj['hasControls'] = true;
-      obj['hasBorders'] = true;
-      canvas.renderAll();
-    }
-  }
-  function uploadimage(){
-    var obj = canvas.getActiveObject();
-    if(obj){
-      obj['hasControls'] = false;
-      obj['hasBorders'] = false;
-      canvas.renderAll();
-    }
-    var pcanvas = document.getElementById('cv');
-    var uidata = {};
-    var canvasData = pcanvas.toDataURL();
-    canvasData = canvasData.replace(/^data:image\/png;base64,/, '');
-    uidata.image = canvasData;
-    if(obj){
-      obj['hasControls'] = true;
-      obj['hasBorders'] = true;
-      canvas.renderAll();
-    }
-    $.ajax({
-      url: 'common/php/upload.php',
-      type: 'POST',
-      data: uidata,
-      success: function(xml) {
-console.log("upload.php");
-        var planetimage = $(xml).find("planetimage").text();
-        $.ajax({ type: "POST",
-          url: "common/php/chat.php",
-          data: "mode=file&room="+roomid+"&file="+planetimage,
-          success: function(xml){
-console.log(planetimage);
-          }
+    function putfimg(fname, lp, tp, ap){
+  console.log("putfimg:", fname);
+      fabric.Image.fromURL(fname, function(pe){
+        pe.setControlsVisibility({
+  mt:false, mb:false, ml:false, mr:false, bl:false, br:false, tl:false, tr:false,
+          mtr: true,
         });
-      },
-      error(jqXHR, textStatus, errorThrown) {
-      },
-    });
-  }
-  function redrawjson(rflag){
-    $.getJSON(rfname+"?"+(new Date().getTime()), function(da) {
-console.log("json:",rfname);
-      var len = da.length;
-      if((len <= 1)&&(rflag == true)){
-console.log("no data:"+rfname);
-        putbimg('common/images/nodata.png');
-      }else{
-        putbimg('common/images/originalplanet.png');
-        for(var i=1; i<len; i++){
-          putfimg('img/'+da[i].img, da[i].left, da[i].top, da[i].angle);
-          var sfname = da[i].img.split('/');
-          allcost += parseInt(sfname[sfname.length-2].substr(1));
-          allitem++;
-        }
-      }
-    }).fail(function() {
-      if(rflag == false){
-        putbimg('common/images/originalplanet.png');
-      }else{
-console.log("no file:"+rfname);
-        putbimg('common/images/nodata.png');
-      }
-    });
-  }
-  function redraw(rflag){
-    canvas.clear();
-    allcost = 0;
-    if($.cookie(jquery_chat_unique) !== 'undefined'){
-      rfname = "save/planet"+$.cookie(jquery_chat_unique)+".json";
-        $.when(redrawjson(rflag)).done(function() {
-  console.log("redraw-fin");
+        canvas.add(pe);
+        canvas.renderAll();
+      },{
+        cornerSize: 40,
+        left: lp,
+        top: tp,
+        angle: ap,
       });
     }
-  }
-  canvas.on("object:selected", function(e){
-    selo = e;
-  });
-  canvas.on('object:moving', function (e){
-    var obj = e.target;
-    if(obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width){
-        return;
+    function savejsdata(sdata){
+      var sdatas = JSON.stringify(sdata);
+  console.log(sdatas);
+      $.ajax({
+        type:'POST',
+        url:'common/php/saveplanet.php',
+        contentType: "Content-Type: application/json; charset=UTF-8",
+        data: sdatas,
+        success: function(){
+  console.log("saveplanet.php");
+  	},
+      }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+          alert(errorThrown);
+      });
     }
-    obj.setCoords();
-    if(obj.getBoundingRect().top < 0 || obj.getBoundingRect().left < 0){
-      obj.top = Math.max(obj.top, obj.top-obj.getBoundingRect().top);
-      obj.left = Math.max(obj.left, obj.left-obj.getBoundingRect().left);
+    function savedata(ndata){
+      var loop = 0;
+      var pdata = new Array();
+      var cunique = $.cookie(jquery_chat_unique);
+      pdata.push({unique:cunique});
+      var objs = canvas.getObjects().map(function(o){
+        if (o.get("type") == "image"){
+  	if(o._originalElement){
+            var pdent = new Object();
+            var imgsrc = o._originalElement.currentSrc;
+            var fname = imgsrc.split('/');
+            if(fname[fname.length-3] == "img"){
+              pdent.left = o.left;
+              pdent.top = o.top;
+              pdent.angle = o.angle;
+              pdent.img = fname[fname.length-2]+"/"+fname[fname.length-1];
+              pdata.push(pdent);
+            }
+  console.log(o.get("type"), ",", fname[fname.length-1]);
+  	}
+        }
+        loop++;
+      });
+      if(ndata){ pdata.push(ndata); }
+      savejsdata(pdata);
+      return loop;
     }
-    if(obj.getBoundingRect().top+obj.getBoundingRect().height  > obj.canvas.height || obj.getBoundingRect().left+obj.getBoundingRect().width  > obj.canvas.width){
-      obj.top = Math.min(obj.top, obj.canvas.height-obj.getBoundingRect().height+obj.top-obj.getBoundingRect().top);
-      obj.left = Math.min(obj.left, obj.canvas.width-obj.getBoundingRect().width+obj.left-obj.getBoundingRect().left);
+    function saveimage(){
+      var obj = canvas.getActiveObject();
+      if(obj){
+        obj['hasControls'] = false;
+        obj['hasBorders'] = false;
+        canvas.renderAll();
+      }
+      var pcanvas = document.getElementById('cv');
+      pcanvas.toBlob(function(blob) {
+        saveAs(blob, "yourplanetimage.png");
+      },"image/pg");
+      if(obj){
+        obj['hasControls'] = true;
+        obj['hasBorders'] = true;
+        canvas.renderAll();
+      }
     }
-  });
-  $('#ToTop').on('click', function () {
-    if(selo){
-      var filter = new fabric.Image.filters.Invert();
-      selo.target.filters.push(filter);
-      selo.target.applyFilters();
-      selo.target.bringToFront();
-      canvas.renderAll();
-      setTimeout(function invani(){
-        filter = new fabric.Image.filters.Invert();
+    function uploadimage(){
+      var obj = canvas.getActiveObject();
+      if(obj){
+        obj['hasControls'] = false;
+        obj['hasBorders'] = false;
+        canvas.renderAll();
+      }
+      var pcanvas = document.getElementById('cv');
+      var uidata = {};
+      var canvasData = pcanvas.toDataURL();
+      canvasData = canvasData.replace(/^data:image\/png;base64,/, '');
+      uidata.image = canvasData;
+      if(obj){
+        obj['hasControls'] = true;
+        obj['hasBorders'] = true;
+        canvas.renderAll();
+      }
+      $.ajax({
+        url: 'common/php/upload.php',
+        type: 'POST',
+        data: uidata,
+        success: function(xml) {
+  console.log("upload.php");
+          var planetimage = $(xml).find("planetimage").text();
+          $.ajax({ type: "POST",
+            url: "common/php/chat.php",
+            data: "mode=file&room="+roomid+"&file="+planetimage,
+            success: function(xml){
+  console.log(planetimage);
+            }
+          });
+        },
+        error(jqXHR, textStatus, errorThrown) {
+        },
+      });
+    }
+    function redrawjson(rflag){
+      $.getJSON(rfname+"?"+(new Date().getTime()), function(da) {
+  console.log("json:",rfname);
+        var len = da.length;
+        if((len <= 1)&&(rflag == true)){
+  console.log("no data:"+rfname);
+          putbimg('common/images/nodata.png');
+        }else{
+          putbimg('common/images/originalplanet.png');
+          for(var i=1; i<len; i++){
+            putfimg('img/'+da[i].img, da[i].left, da[i].top, da[i].angle);
+            var sfname = da[i].img.split('/');
+            allcost += parseInt(sfname[sfname.length-2].substr(1));
+            allitem++;
+          }
+        }
+      }).fail(function() {
+        if(rflag == false){
+          putbimg('common/images/originalplanet.png');
+        }else{
+  console.log("no file:"+rfname);
+          putbimg('common/images/nodata.png');
+        }
+      });
+    }
+    function redraw(rflag){
+      canvas.clear();
+      allcost = 0;
+      if($.cookie(jquery_chat_unique) !== 'undefined'){
+        rfname = "save/planet"+$.cookie(jquery_chat_unique)+".json";
+          $.when(redrawjson(rflag)).done(function() {
+    console.log("redraw-fin");
+        });
+      }
+    }
+    canvas.on("object:selected", function(e){
+      selo = e;
+    });
+    canvas.on('object:moving', function (e){
+      var obj = e.target;
+      if(obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width){
+          return;
+      }
+      obj.setCoords();
+      if(obj.getBoundingRect().top < 0 || obj.getBoundingRect().left < 0){
+        obj.top = Math.max(obj.top, obj.top-obj.getBoundingRect().top);
+        obj.left = Math.max(obj.left, obj.left-obj.getBoundingRect().left);
+      }
+      if(obj.getBoundingRect().top+obj.getBoundingRect().height  > obj.canvas.height || obj.getBoundingRect().left+obj.getBoundingRect().width  > obj.canvas.width){
+        obj.top = Math.min(obj.top, obj.canvas.height-obj.getBoundingRect().height+obj.top-obj.getBoundingRect().top);
+        obj.left = Math.min(obj.left, obj.canvas.width-obj.getBoundingRect().width+obj.left-obj.getBoundingRect().left);
+      }
+    });
+    $('#ToTop').on('click', function () {
+      if(selo){
+        var filter = new fabric.Image.filters.Invert();
         selo.target.filters.push(filter);
         selo.target.applyFilters();
-        canvas.renderAll();},200);
-    }
-  });
-  $('#SavePlanet').on('click', function () {
-    savedata();
-    $('#planetmessage').text("Planet saved");
-    setTimeout(function(){
-      $('#planetmessage').text("");
-    },2000);
-  });
-  $('#PlanetImage').on('click', function () {
-    saveimage();
-  });
-  $('#PlanetUpload').on('click', function () {
-    uploadimage();
-    $('#planetmessage').text("Planet image uploaded");
-    setTimeout(function(){
-      $('#planetmessage').text("");
-    },2000);
-  });
-  $mc = $('#fileswin').masonry({
-    itemSelector: '.item',
-  });
-  function setbtn(val){
-    $('#'+val).on('click', function () {
-console.log("Called");
-      $mc.masonry('remove', $mc.find('.item')).masonry('layout');
-      $.getJSON("img/"+val+"/files.json"+"?"+(new Date().getTime()), function(data) {
-console.log("OK load");
-        $.each(data, function(){
-		  var $item = $('<div class="item"><img src="img/'+val+'/'+this+'"/></div>');
-          $mc.append($item).masonry('appended', $item).masonry('layout');
-        })
-      })
-    });
-  }
-  ['p1','p5','p10','p15','p30','p50','p60','p75','p100','p300','p500','p1200'].map(function(o) { setbtn(o); });
-  $mc.on('click', '.item', function(event) {
-    if(imgsrc = event.target.src){
-      var fname = imgsrc.split('/');
-      var filen = fname[fname.length-2]+'/'+fname[fname.length-1];
-console.log(filen);
-      var pdent = new Object();
-      pdent.left = 64;
-      pdent.top = 64;
-      pdent.angle = 0;
-      pdent.img = filen;
-      var sfname = filen.split('/');
-      var tp = parseInt(sfname[sfname.length-2].substr(1));
-      if(parseInt(allcost)+parseInt(tp) > allgood){
-        $('#nurturemessage').text("Shortage of points....");
-        setTimeout(function(){
-          $('#nurturemessage').text("");
-        },2000);
-      }else{
-console.log("allcost:"+allcost);
-        if(parseInt(allcost) == 0){
-          redraw(false);
-        }
-        allcost += tp;
-        allitem++;
-        putfimg('img/'+filen, 64, 64, 0);
-        savedata(pdent);
-	$('#allcostp').text(allcost);
-	$('#allitemp').text(allitem);
-        $('#nurturemessage').text("You got a new item. Let's arrange it on your planet!");
-        setTimeout(function(){
-          $('#nurturemessage').text("");
-        },2000);
+        selo.target.bringToFront();
+        canvas.renderAll();
+        setTimeout(function invani(){
+          filter = new fabric.Image.filters.Invert();
+          selo.target.filters.push(filter);
+          selo.target.applyFilters();
+          canvas.renderAll();},200);
       }
-    };
-  });
-  $(document).ready(function(){
-    redraw(true);
-  });
-});
+    });
+    $('#SavePlanet').on('click', function () {
+      savedata();
+      $('#planetmessage').text("Planet saved");
+      setTimeout(function(){
+        $('#planetmessage').text("");
+      },2000);
+    });
+    $('#PlanetImage').on('click', function () {
+      saveimage();
+    });
+    $('#PlanetUpload').on('click', function () {
+      uploadimage();
+      $('#planetmessage').text("Planet image uploaded");
+      setTimeout(function(){
+        $('#planetmessage').text("");
+      },2000);
+    });
+    $mc = $('#fileswin').masonry({
+      itemSelector: '.item',
+    });
+    function setbtn(val){
+      $('#'+val).on('click', function () {
+  console.log("Called");
+        $mc.masonry('remove', $mc.find('.item')).masonry('layout');
+        $.getJSON("img/"+val+"/files.json"+"?"+(new Date().getTime()), function(data) {
+  console.log("OK load");
+          $.each(data, function(){
+  		  var $item = $('<div class="item"><img src="img/'+val+'/'+this+'"/></div>');
+            $mc.append($item).masonry('appended', $item).masonry('layout');
+          })
+        })
+      });
+    }
+    ['p1','p5','p10','p15','p30','p50','p60','p75','p100','p300','p500','p1200'].map(function(o) { setbtn(o); });
+    $mc.on('click', '.item', function(event) {
+      if(imgsrc = event.target.src){
+        var fname = imgsrc.split('/');
+        var filen = fname[fname.length-2]+'/'+fname[fname.length-1];
+  console.log(filen);
+        var pdent = new Object();
+        pdent.left = 64;
+        pdent.top = 64;
+        pdent.angle = 0;
+        pdent.img = filen;
+        var sfname = filen.split('/');
+        var tp = parseInt(sfname[sfname.length-2].substr(1));
+        if(parseInt(allcost)+parseInt(tp) > allgood){
+          $('#nurturemessage').text("Shortage of points....");
+          setTimeout(function(){
+            $('#nurturemessage').text("");
+          },2000);
+        }else{
+  console.log("allcost:"+allcost);
+          if(parseInt(allcost) == 0){
+            redraw(false);
+          }
+          allcost += tp;
+          allitem++;
+          putfimg('img/'+filen, 64, 64, 0);
+          savedata(pdent);
+  	$('#allcostp').text(allcost);
+  	$('#allitemp').text(allitem);
+          $('#nurturemessage').text("Let's arrange the new item on your planet!");
+          setTimeout(function(){
+            $('#nurturemessage').text("");
+          },2000);
+        }
+      };
+    });
+    $(document).ready(function(){
+      redraw(true);
+    });
+  };
 })(jQuery);

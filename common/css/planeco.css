@@ -88,7 +88,7 @@ li{
   top: 0;
   left: 0;
   width: 100%;
-  height: 30px;
+  height: 40px;
   line-height: 30px;
   background-color: #000000;
   filter: alpha(opacity=70);
@@ -103,10 +103,10 @@ li{
 #logo #lg_right{
   float: right;
   text-align: right;
-  width: 160px;
+  width: 215px;
 }
 #logo img{
-  max-width: 24px;
+  max-width: 32px;
   height: auto;
   margin-right: 3px;
   margin-top: 3px;
@@ -114,11 +114,11 @@ li{
 #header {
   position: fixed !important;
   position: absolute;
-  top: 31px;
+  top: 41px;
   left: 0;
   width: 100%;
-  height: 35px;
-  line-height: 35px;
+  height: 40px;
+  line-height: 40px;
   background-color: #000000;
   filter: alpha(opacity=70);
   -moz-opacity: 0.70;
@@ -129,9 +129,9 @@ li{
   z-index: 100;
 }
 #header img{
-  width:25px;
+  width:32px;
   height:auto;
-  margin-right:10px;
+  margin-right:13px;
   vertical-align:middle;
 }
 
@@ -542,7 +542,7 @@ body > #container > #planetwin {
   margin: auto;
   border-radius: 0px;
   margin: 0px;
-  margin-top: 30px;
+  margin-top: 40px;
   border: 1px solid #ccc;
   display: none;
 }
@@ -567,12 +567,17 @@ body > #container > #planetwin > #planetcanvas {
   display: none;
 }
 
+#nurturebtn {
+  height: 100%;
+  margin-top: 20px;
+}
+
 #nurturemessage {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
-  margin-top: -30px;
+  margin-top: -18px;
   width: 100%;
   background-color: #FF0004;
   line-height: 30px;
@@ -591,7 +596,7 @@ body > #container > #nurturewin > #fileswin {
   border-radius: 0px;
   padding: 0;
   margin: 0px;
-  margin-top: 30px;
+  margin-top: 5px;
   display: block;
 }
 
