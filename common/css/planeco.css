@@ -377,7 +377,7 @@ li{
 #sys_setting{
   position: fixed !important;
   position: absolute;
-  top: 67px;
+  top: 82px;
   left: 0;
   width: 100%;
   background-color: #000000;
@@ -413,7 +413,7 @@ li{
 #setting{
   position: fixed !important;
   position: absolute;
-  top: 67px;
+  top: 82px;
   left: 0;
   width: 100%;
   background-color: #000000;
@@ -443,10 +443,10 @@ li{
 #stamp_wrap{
   position: fixed !important;
   position: absolute;
-  top: 67px;
+  top: 82px;
   left: 0;
   width: 100%;
-  height: 80px;
+  height: 150px;
   background-color: #000000;
   filter: alpha(opacity=80);
   -moz-opacity: 0.80;
