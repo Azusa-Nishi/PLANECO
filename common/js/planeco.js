@@ -72,7 +72,6 @@ jQuery.event.add(window,"load",function() {
     jquery_chat_name   = 'jquery_chat_name'+opt.room_id;
     jquery_chat_unique = 'jquery_chat_unique'+opt.room_id;
     
-
 /*****************************************************
  * 初回ロード時にDB接続を確認する
  *****************************************************/
@@ -86,11 +85,9 @@ jQuery.event.add(window,"load",function() {
         }
     });
 
-
 /*****************************************************
  * HTMLなんかを挿入する
  *****************************************************/
-
 
   /* システム設定拡張用
    *------------------------------------*/
@@ -114,7 +111,6 @@ jQuery.event.add(window,"load",function() {
           html += '    </div>';
           html += '  </div>';
           $(this).after(html);
-
 
   /* カラーパレット
    *------------------------------------*/
@@ -215,7 +211,6 @@ var html = '';
       $.removeCookie(jquery_chat_unique);
     }
     
-    
 /*****************************************************
  * HTMLの挿入が終わったら
  * ウインドサイズによって幅を変更する
@@ -246,7 +241,6 @@ var html = '';
         $("#var").attr("maxlength","500");
       }
       
-      
 /*****************************************************
  * システム設定色々 len_change_button log_len
  * @len_change_button -> 表示件数の変更(過去ログ閲覧) 
@@ -261,8 +255,6 @@ var html = '';
         $("#header").hide();
         e.preventDefault();
       });
-      
-      
 
 /*****************************************************
  * logout
@@ -315,7 +307,6 @@ console.log("Logout");
         e.preventDefault();
       }
     });
-      
 
   /* [ログ記録処理] Geolocation API
    *------------------------------------*/
@@ -372,7 +363,6 @@ console.log("LON:"+lon+" LAT:"+lat);
           e.preventDefault();
         }
       });
-      
       
 /*****************************************************
  * セッティング色々ぼっくす
@@ -447,7 +437,6 @@ console.log("LON:"+lon+" LAT:"+lat);
                 }
               }
           });
-          
       });
 
 /*****************************************************
@@ -527,7 +516,6 @@ console.log("LON:"+lon+" LAT:"+lat);
 /*****************************************************
  * 書いてないよー等のメッセージ部分はクリックで消す
  *****************************************************/
-
       $(document).on('click','#message',function(e){
         $(this).slideUp();
       });
@@ -548,6 +536,7 @@ console.log("LON:"+lon+" LAT:"+lat);
         });
 	readLog();
       });
+
 /*****************************************************
  * ボタン送信!!
  *****************************************************/
@@ -605,22 +594,14 @@ console.log("LON:"+lon+" LAT:"+lat);
         e.preventDefault();
       });
 
-
-
-
-
 /*****************************************************
  * ログを書き込む
  *****************************************************/
     function logWrite(name,logout){
-      
-      
-
     /* [ログ記録処理]
      * 名前送信の場合は入室メッセージ
      *------------------------------------*/
       if(name){
-
        //個人を特定するユニークな値をCOOKIEに記録
           var unique = Math.round( Math.random()*10000 )+'_'+$.now();
           $.cookie(jquery_chat_unique, unique, { expires: 7 });
@@ -631,7 +612,6 @@ console.log("LON:"+lon+" LAT:"+lat);
                 cs_top();
               }
           });
-
       }
 
     /* [ログ記録処理]
@@ -677,13 +657,8 @@ console.log("LON:"+lon+" LAT:"+lat);
                   $("#var").val('');
                   return ;
             }
-            var kuzi = '';
-            if(val === '#fortune' || val === '#health' || val === '#love' || val === '#quiz'){
-              kuzi = val;
-            }
-              
         
-          $.ajax({ type: "POST",url: "common/php/chat.php",data: "mode=send&room="+opt.room_id+"&str="+val+'&c='+$("#c").val()+'&l='+$("#l").val()+"&kuzi="+kuzi,
+          $.ajax({ type: "POST",url: "common/php/chat.php",data: "mode=send&room="+opt.room_id+"&str="+val+'&c='+$("#c").val()+'&l='+$("#l").val(),
               success: function(xml){
                 var limit = $(xml).find("limit").text();
                 if(!limit){
@@ -702,8 +677,6 @@ console.log("LON:"+lon+" LAT:"+lat);
       }
     }
 
-
-
 /*****************************************************
  * ログ配列(画像表示のため改変)
  *****************************************************/
@@ -718,11 +691,8 @@ console.log("LON:"+lon+" LAT:"+lat);
       var img  = $(xml).find("img").text();
       var hash = $(xml).find("hash").text();
       var good = $(xml).find("good").text();
-
       var myunq = $.cookie(jquery_chat_unique);
-
       log = sanitize( log ); 
-      
       log = getLink(log);
       var dstyle = '';
 
@@ -779,9 +749,7 @@ console.log("LON:"+lon+" LAT:"+lat);
           }
         }
       } 
-
     }
-
     $(document).on("click", ".quiz", function () {
       $.confirm({
         title: 'Answer',
@@ -826,9 +794,7 @@ console.log("LON:"+lon+" LAT:"+lat);
                  log_reload();
              }
           }
-          
       });
-      
       
     /* 
      * LI 最後尾のIDを得る
@@ -842,16 +808,13 @@ console.log("LON:"+lon+" LAT:"+lat);
       $("#log").data('lasthash',id);
     }
 
-
 /*****************************************************
  * ログのリロード
  *****************************************************/
     var timer_id;
     function log_reload(){
       clearTimeout(timer_id); //setTimeoutは初期化する
-//      
       var slide = $("#log").data("slide");
-
     /* 
      * 最新記事を確認
      *------------------------------------*/
@@ -874,7 +837,6 @@ console.log("LON:"+lon+" LAT:"+lat);
 
     }
 
-
 /*****************************************************
  * エンターキー制御
  * 入室の時は間違ってエンター押すと面倒なので
@@ -887,8 +849,6 @@ console.log("LON:"+lon+" LAT:"+lat);
           return false;
         }
       });
-
-
 
 /*****************************************************
  * URLぽい文字にリンクタグを
@@ -906,7 +866,6 @@ console.log("LON:"+lon+" LAT:"+lat);
       return s;
     }
 
-
 /*****************************************************
  * PCの場合は枠の幅を350pxにする
  *****************************************************/
@@ -920,7 +879,6 @@ console.log("LON:"+lon+" LAT:"+lat);
         $(".pc").css({"width":'100%'});
       }
     }
-
 
 /*****************************************************
  * 下へスライドする
@@ -942,7 +900,6 @@ console.log("LON:"+lon+" LAT:"+lat);
          }, 100, "swing");
 console.log("cs_top");
     }
-    
 
 /*****************************************************
  * ファイルアップロード(jQuery_File_Uploadを利用するため完全入れ替え)
@@ -998,7 +955,6 @@ console.log(ufilename);
     function sanitize(val){
       return $('<div />').text(val).html();
     }
-    
 
   /* 
    * Themeの設定と変更
@@ -1026,16 +982,13 @@ console.log(ufilename);
       var n = Math.ceil( Math.random()*(Theme.length));
       var set_Theme = Theme[n];
       if(!set_Theme) set_Theme = Theme[0];
-
       if(set_Theme.bgcolor){
         $("body").css({"background-color":set_Theme.bgcolor});
         $("#container").css({"background-color":set_Theme.bgcolor});
       }
-
       if(set_Theme.bgimage){
         $("#container").css({"background-image":set_Theme.bgimage});
       }
-      
     }
 })(jQuery);
 
@@ -1316,6 +1269,5 @@ console.log("allcost:"+allcost);
   $(document).ready(function(){
     redraw(true);
   });
-
 });
 })(jQuery);
