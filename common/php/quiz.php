@@ -74,7 +74,7 @@ class Omikuzu{
         'ヽ(=´▽`=)ﾉ Maybe you can meet someone that you like...let\'s go outside!'
        ,'(´・ω・`) Becareful not to cheet...'
        ,'(*^_^*) Let\'s shake hands!'
-       ,'(´～｀)ﾓｸﾞﾓｸﾞ Let\'s eat dinner together with your lover!'
+       ,'(´～｀) Let\'s eat dinner together with your lover!'
        ,'( ﾟдﾟ) Ooh...becareful on today\'s date...'
        ,'Best day to take your lover to a date!'
        ,'( ｰ`дｰ´) Dress up cool and let\'s go!'
