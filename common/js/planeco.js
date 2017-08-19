@@ -272,7 +272,6 @@ var html = '';
                 $("#nurturewin").slideUp(600);
                 $("#chat").slideDown(600);
                 $("#log").slideDown(600);
-                redraw(true);
                 logWrite(null,true);
                 $.removeCookie(jquery_chat_name);
                 $.removeCookie(jquery_chat_unique);
@@ -627,6 +626,8 @@ console.log("LON:"+lon+" LAT:"+lat);
         if(opt.log_logof === true) {
           $.ajax({ type: "POST",url: "common/php/chat.php",data: "mode=logout&room="+opt.room_id+"&name="+$.cookie(jquery_chat_name)+"&mes="+opt.logout,
               success: function(xml){
+                redraw(true);
+console.log("Logout and Planet Data Erased");
                 readLog(true,'');
                 cs_top();
               }

@@ -363,10 +363,12 @@ li{
 }
 
 #form a{
+  width: 100%;
+  margin-left: 80px;
   display: block;
   height: 40px;
   line-height: 40px;
-  text-align: center;
+  text-align: left;
   position: absolute;
   bottom: 0px;
   color: #FFFFFF;
@@ -497,6 +499,7 @@ button.quiz {
 }
 
 #button {
+  width: 100%;
   text-align: left;
 }
 .item {
