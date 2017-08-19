@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>Planeco - Planet Eco - Beta0.2</title>
+<script type="text/javascript" src="common/js/jquery.min.js"></script>
+<script type="text/javascript" src="common/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="common/js/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="common/js/fabric.min.js"></script>
+<script type="text/javascript" src="common/js/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="common/js/FileSaver.min.js"></script>
+<script type="text/javascript" src="common/js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="common/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="common/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="common/js/planeco.js"></script>
+<script type="text/javascript" src="common/js/jquery.fileupload.js"></script>
+<link href="common/css/planeco.css" rel="stylesheet" type="text/css">
+<link href="common/css/jqfustyle.css" rel="stylesheet" type="text/css">
+<link href="common/css/jquery-confirm.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id="loader"><img src="common/images/loader.gif" /></div><div id="fade"></div>
+<div id="container">
+  <div id="logo" class="pc">
+    <div id="lg_left">PLANECO #7</div>
+    <div id="lg_right">
+      <a href="#" id="talk"><img src="common/images/talk.png" /></a>
+      <a href="#" id="planet"><img src="common/images/planet.png" /></a>
+      <a href="#" id="nurture"><img src="common/images/nurture.png" /></a>
+      <a href="#" id="system"><img src="common/images/sys.png" /></a>
+      <a href="#" id="logof"><img src="common/images/logof.png" /></a>
+    </div>
+  </div>
+  <div id="header" class="pc">
+    <a href="#" id="map"><img src="common/images/map.png" /></a>
+    <a href="#" id="stamp"><img src="common/images/stamp.png" /></a>
+    <a href="#" id="custom"><img src="common/images/color.png" /></a>
+    <a href="#" id="setup"><img src="common/images/syss.png" /></a>
+  </div>
+  
+  <div id="log" data-lasthash="" data-slide="on" class="pc">
+    <ul></ul>
+  </div>
+  <div id="planetwin" class="pc">
+    <div id="planetctrl">
+      <button id="ToTop" style="margin-top:10px;">Bring to Top</button>
+      <button id="SavePlanet" style="margin-top:10px;">Save</button>
+      <button id="PlanetImage" style="margin-top:10px;">Image</button>
+      <button id="PlanetUpload" style="margin-top:10px;">Upload</button>
+    </div>
+    <div id="planetmessage"></div>
+    <div id="planetcanvas">
+      <canvas id="cv" class="pc" width='360' height="460px"></canvas>
+    </div>
+  </div>
+  <div id="nurturewin" class="pc">
+    <div id="nurturebtn">
+      <button id="p1" >1pt</button>
+      <button id="p5" >5pt</button>
+      <button id="p10" >10pt</button>
+      <button id="p15" >15pt</button>
+      <button id="p30" >30pt</button>
+      <button id="p50" >50pt</button>
+      <button id="p60" >60pt</button>
+      <button id="p75" >75pt</button>
+      <button id="p100" >100pt</button>
+      <button id="p300" >300pt</button>
+      <button id="p500" >500pt</button>
+      <button id="p1200" >1200pt</button>
+    </div>
+    <div id="nurturemessage"></div>
+    <div id="allgood">You got <span id="allgoodp"></span>pts and used <span id="allcostp"></span>pts of <span id="allitemp"></span> items.</div>
+    <div id="fileswin">
+    </div>
+  </div>
+  <div id="end"></div>
+</div>
+
+<script type="text/javascript">
+  var jquery_chat_name, jquery_chat_unique;
+  var roomid = '007';
+  $(function(){
+    $('#container').jqueryChat({
+      'room_id'    : roomid, //部屋ID
+      'flaggmap'   : true,
+    });
+  });
+</script>
+
+</body>
+</html>
