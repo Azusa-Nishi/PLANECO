@@ -25,8 +25,8 @@ jQuery.event.add(window,"load",function() {
         'delcookie'  : false,
         'log_login'  : true,
         'log_logof'  : true,
-        'bt_name'    : 'Send your name',
-        'bt_chat'    : 'Write message',
+        'bt_name'    : 'Send your name (max 9 letters)',
+        'bt_chat'    : 'Write your message',
         'mes_logout' : 'Are you going to leave PLANECO?',
         'err_name'   : 'What is your name?',
         'err_upload' : 'Fail to upload',
@@ -39,26 +39,27 @@ jQuery.event.add(window,"load",function() {
         'gmap'       : 'Your global position will be revealed. Is is Ok?',
         'color'      : 'FF0004,0A00FF,FF00D6,2B9700,FF7600,666666',
         'terms'      : '<h1>Terms</h1>'+
-'- You can not post statements, images, contrary to public order and morals, or content prohibited by law.<br>'+
-'- Inappropriate posting is subject to deletion and subject to access restriction by Web Coockie and IP address.'+
-'<h1>Story</h1>- You are a planet incubator. You can design their own planet by making good actions for the earth.<br>'+
+'- You can not post any statements, images, contraries that against to public order and morals, or contents prohibited by law.<br>'+
+'- Inappropriate posting is subject to deletion and subject to access restriction by Web Coockie and IP address.<br>'+
+'- Do not use this application for political and/or religeous propaganda operations.'+
+'<h1>Story</h1>- You are a planet incubator. You can design your own planet by making good actions for the earth.<br>'+
 'PLANECO provides SNS community for sharing the good-for-earth actions.<br>'+
-'- You can share your action by sharing chat messages, photos, stamps, geo-locations.<br>'+
-'- You can earn points by receiving Good! votes of other incubators.<br>'+
+'- You can share your action by sharing chat messages, photos, stamps, and geo-locations.<br>'+
+'- You can earn points by receiving Good! votes from other users.<br>'+
 '- You can design and share your own customized planet by decorating it using Good! points.'+
 '<h1>How to use</h1>'+
-'<img src="common/images/talk.png" style="background-color:#000;"/> Open chat window. You can chat your messages. In chat window, you can use the following functions.<br>'+
-'<img src="common/images/sys.png" width="25" style="background-color:#000;"/> Open the following function menu.<br>'+
-'<img src="common/images/map.png" width="25" style="background-color:#000;"/> Share your GPS location. You may configure setting menu of your smartphone  to use.<br>'+
+'<img src="common/images/talk.png" style="background-color:#000;"/> Open chat window. You can chat your messages. In this window, you can use the following functions.<br>'+
+'<img src="common/images/sys.png" width="25" style="background-color:#000;"/> Open the function menu. You can use the following four functions inside. <br>'+
+'<img src="common/images/map.png" width="25" style="background-color:#000;"/> Share your GPS location. You may configure the setting menu of your smartphone to use.<br>'+
 '<img src="common/images/stamp.png" width="25" style="background-color:#000;"/> Share ECO stamps.<br>'+
 '<img src="common/images/color.png" width="25" style="background-color:#000;"/> Change the color of your chat name and chat messages.<br>'+
 '<img src="common/images/syss.png" width="25" style="background-color:#000;"/> Change the number of lines to show in the chat window.<br>'+
-'<img src="common/images/planet.png" style="background-color:#000;"/> Open planet design window. You can design your planet. If you got planet ornaments in nurturing window, you can move and rotate it to decorate your planet.<br>'+
+'<img src="common/images/planet.png" style="background-color:#000;"/> Open the planet design window. You can design your own planet. If you earn planet ornaments in the nurturing window, you can move and rotate it in this window to decorate your planet.<br>'+
 '- Bring to Top: Bring the selected planet ornament to the top hierarchy of the layer.<br>'+
-'- Save: Save your planet design into the server. You have to save if you finish your decoration.<br>'+
-'- Image: Download the image of current planet design as a PNG imnage.<br>'+
-'- Upload: Upload the image of current planet design as your Chat message.<br>'+
-'<img src="common/images/nurture.png" style="background-color:#000;"/> Get planet ornaments. It shows your total Good! points and used number of items and Good! points to get planet ornaments. Push the points icon, then it shows the verious fancy planet ornaments. Push it and get it.<br>'+
+'- Save: Save your planet design into the server. Don\'t forget to save if you finish your decoration.<br>'+
+'- Image: Download the image of your current planet design as a PNG imnage.<br>'+
+'- Upload: Upload the image of your current planet design as your Chat message.<br>'+
+'<img src="common/images/nurture.png" style="background-color:#000;"/> Get planet ornaments. It shows your total Good! points and used number of items and Good! points to get planet ornaments. Push the blue points icon, then it shows various fancy planet ornaments. Push it and get it.<br>'+
 '<img src="common/images/logof.png" style="background-color:#000;"/> Log off PLANECO'+
 'Please press CONFIRM if you observe the terms.'
     }, options);
