@@ -471,6 +471,8 @@ console.log("LON:"+lon+" LAT:"+lat);
             $("#header").slideUp(600);
             $("#camera").slideUp(600);
             $("#stamp_wrap").slideUp(600);
+            $("#sys_setting").slideUp(600);
+            $("#setting").slideUp(600);
             $("#message").hide(600);
             $("#planetwin").slideDown(600);
         }
@@ -494,6 +496,8 @@ console.log("LON:"+lon+" LAT:"+lat);
               $("#header").slideUp(600);
               $("#camera").slideUp(600);
               $("#stamp_wrap").slideUp(600);
+              $("#sys_setting").slideUp(600);
+              $("#setting").slideUp(600);
               $("#message").hide(600);
               $("#nurturewin").slideDown(600);
               cs_down();
