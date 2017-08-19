@@ -198,29 +198,89 @@ if(isset($_POST) AND is_array($_POST)){
     /*
      * おみくじ発動！
      */
-      if($post['kuzi']){
-        $data['kuzi'] = 'kuzi';
+      if(strpos($post['str'], "#") === 0){
         $omikuzi = new Omikuzu;
-        
         switch($log_str){
           case '#quiz':
             $data[':str']  = '[ECO Quiz Challenge] ';
             $data[':str'] .= $omikuzi->Quiz();
+        $data['kuzi'] = 'kuzi';
           break;
           case '#fortune':
-            $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'\'s fortune] ';
+            $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'\'s fortune] '.strpos($post['str'], "#fortune");
             $data[':str'] .= $omikuzi->Nomal();
+        $data['kuzi'] = 'kuzi';
           break;
           case '#health':
             $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'\'s health fortune] ';
             $data[':str'] .= $omikuzi->Kenko();
+        $data['kuzi'] = 'kuzi';
           break;
           case '#love':
             $data[':str']  = '['.$_COOKIE['jquery_chat_name'.$post['room']].'\'s love fortune] ';
             $data[':str'] .= $omikuzi->Renai();
+        $data['kuzi'] = 'kuzi';
           break;
         }
-        
+      }
+
+    /*
+     * コマンド発動！
+     */
+
+      if(strpos($post['str'], "%cmd ") === 0){
+        $cmdop = substr($post['str'], 5);
+	$cmdstr = "clear_all_database_entries";
+	if(strcmp($cmdop, $cmdstr) == 0){
+		system("/bin/cp ../../db/chat2.sqlite-original ../../db/chat2.sqlite");
+	}
+# 'id' , 'room_id' , 'chat_unique' ,     'hash' ,                        'time' ,   'chat_name' , 'str' , 'remoote_addr' 
+	$cmdstr = "clear_database_entries_of_roomd";
+	if(strpos($cmdop, $cmdstr) == strlen($cmdstr)){
+		$cmdop = substr($post['str'], strlen($cmdstr));
+		$db = dbClass::connect();
+		$sql = "DELETE FROM chat_log WHERE room_id=:room_id";
+		$data = array(
+		   ':room_id'      => $cmdop
+		);
+		try { 
+			$stmt =  $db->prepare($sql);
+			$stmt -> execute($data);
+			$row  =  $stmt->fetch(PDO::FETCH_ASSOC);
+		} catch (PDOException $err) {
+		}
+	}
+	$cmdstr = "clear_database_entries_of_hash";
+	if(strpos($cmdop, $cmdstr) == strlen($cmdstr)){
+		$cmdop = substr($post['str'], strlen($cmdstr));
+		$db = dbClass::connect();
+		$sql = "DELETE FROM chat_log WHERE hash=:hash";
+		$data = array(
+		   ':hash'      => $cmdop
+		);
+		try { 
+			$stmt =  $db->prepare($sql);
+			$stmt -> execute($data);
+			$row  =  $stmt->fetch(PDO::FETCH_ASSOC);
+		} catch (PDOException $err) {
+		}
+	}
+	$cmdstr = "clear_database_entries_of_chatname";
+	if(strpos($cmdop, $cmdstr) == strlen($cmdstr)){
+		$cmdop = substr($post['str'], strlen($cmdstr));
+		$db = dbClass::connect();
+		$sql = "DELETE FROM chat_log WHERE chat_name=:chatname";
+		$data = array(
+		   ':chatname'      => $cmdop
+		);
+		try { 
+			$stmt =  $db->prepare($sql);
+			$stmt -> execute($data);
+			$row  =  $stmt->fetch(PDO::FETCH_ASSOC);
+		} catch (PDOException $err) {
+		}
+	}
+	$post['str'] = '';
       }
       
     //発言が空じゃなければ
