@@ -368,11 +368,10 @@ li{
 
 #form a{
   width: 100%;
-  margin-left: 80px;
   display: block;
   height: 40px;
   line-height: 40px;
-  text-align: left;
+  text-align: center;
   position: absolute;
   bottom: 0px;
   color: #FFFFFF;
