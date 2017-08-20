@@ -29,7 +29,7 @@ $pcanvas = $('#planetcanvas');
         'delcookie'  : false,
         'log_login'  : true,
         'log_logof'  : true,
-        'bt_name'    : 'Send your name (max 9 letters)',
+        'bt_name'    : 'Send your name (max 8 letters)',
         'bt_chat'    : 'Write your message',
         'mes_logout' : 'Are you going to leave PLANECO?',
         'err_name'   : 'What is your name?',
@@ -275,7 +275,7 @@ var html = '';
                 logWrite(null,true);
                 $.removeCookie(jquery_chat_name);
                 $.removeCookie(jquery_chat_unique);
-console.log("Logout");
+//  console.log("Logout");
                 $("#form a").text(opt.bt_name);
                 location.href=location.href;
               },
@@ -315,7 +315,7 @@ console.log("Logout");
         function successCallback(position) {
           var lon = position.coords.latitude;
           var lat = position.coords.longitude;
-console.log("LON:"+lon+" LAT:"+lat);
+// console.log("LON:"+lon+" LAT:"+lat);
           if(lon && lat){
             var val = lon+','+lat;
               $.ajax({ type: "POST",url: "common/php/chat.php",data: "mode=gmap&room="+opt.room_id+"&val="+val,
@@ -530,12 +530,12 @@ console.log("LON:"+lon+" LAT:"+lat);
  *****************************************************/
       $(document).on('click','.lil,.lir,.lili,.liri',function(e){
         var gid = $(this).attr("id");
-//console.log("GOOD!:",gid);
+//  console.log("GOOD!:",gid);
         $.ajax({ type: "POST",url: "common/php/chat.php",data: "mode=good&room="+opt.room_id+"&hash="+gid+"&goodfrom="+$.cookie(jquery_chat_unique),
           success: function(xml){
            var good = $(xml).find("good").text();
            var goodwho = $(xml).find("goodwho").text();
-//console.log(good, goodwho);
+//  console.log(good, goodwho);
 // なんか星と数字とか飛ばすかいな。goodの数だけ
            }
         });
@@ -627,7 +627,7 @@ console.log("LON:"+lon+" LAT:"+lat);
           $.ajax({ type: "POST",url: "common/php/chat.php",data: "mode=logout&room="+opt.room_id+"&name="+$.cookie(jquery_chat_name)+"&mes="+opt.logout,
               success: function(xml){
                 redraw(true);
-console.log("Logout and Planet Data Erased");
+// console.log("Logout and Planet Data Erased");
                 readLog(true,'');
                 cs_top();
               }
@@ -895,7 +895,7 @@ console.log("Logout and Planet Data Erased");
          $("html, body").animate({ 
             scrollTop:pos 
          }, 1500, "swing");
-//console.log("cs_top");
+//  console.log("cs_top");
     }
     
 /*****************************************************
@@ -905,7 +905,7 @@ console.log("Logout and Planet Data Erased");
          $("html, body").animate({ 
             scrollTop:0 
          }, 100, "swing");
-console.log("cs_top");
+//  console.log("cs_top");
     }
 
 /*****************************************************
@@ -920,10 +920,10 @@ console.log("cs_top");
         url: url,
         dataType: 'json',
         done: function (e, data) {
-console.log("index.php");
+// console.log("index.php");
           $.each(data.result.files, function (index, file) {
             ufilename = file.name;
-console.log(ufilename);
+// console.log(ufilename);
             $('<p/>').text(ufilename).appendTo('#files');
             chatupimg();
           });
@@ -1005,7 +1005,7 @@ console.log(ufilename);
     fabric.Group.prototype.lockScalingY = true; // グループでスケール禁止
   
     function putbimg(fname){
-  console.log("putbimg:", fname);
+// console.log("putbimg:", fname);
       fabric.Image.fromURL(fname, function(pe){
         pe.set({selectable: false});
         canvas.add(pe);
@@ -1016,7 +1016,7 @@ console.log(ufilename);
       });
     }
     function putfimg(fname, lp, tp, ap){
-  console.log("putfimg:", fname);
+//  console.log("putfimg:", fname);
       fabric.Image.fromURL(fname, function(pe){
         pe.setControlsVisibility({
   mt:false, mb:false, ml:false, mr:false, bl:false, br:false, tl:false, tr:false,
@@ -1033,14 +1033,14 @@ console.log(ufilename);
     }
     function savejsdata(sdata){
       var sdatas = JSON.stringify(sdata);
-  console.log(sdatas);
+//  console.log(sdatas);
       $.ajax({
         type:'POST',
         url:'common/php/saveplanet.php',
         contentType: "Content-Type: application/json; charset=UTF-8",
         data: sdatas,
         success: function(){
-  console.log("saveplanet.php");
+//  console.log("saveplanet.php");
   	},
       }).fail(function(XMLHttpRequest, textStatus, errorThrown){
           alert(errorThrown);
@@ -1064,7 +1064,7 @@ console.log(ufilename);
               pdent.img = fname[fname.length-2]+"/"+fname[fname.length-1];
               pdata.push(pdent);
             }
-  console.log(o.get("type"), ",", fname[fname.length-1]);
+//  console.log(o.get("type"), ",", fname[fname.length-1]);
   	}
         }
         loop++;
@@ -1112,13 +1112,13 @@ console.log(ufilename);
         type: 'POST',
         data: uidata,
         success: function(xml) {
-  console.log("upload.php");
+//  console.log("upload.php");
           var planetimage = $(xml).find("planetimage").text();
           $.ajax({ type: "POST",
             url: "common/php/chat.php",
             data: "mode=file&room="+roomid+"&file="+planetimage,
             success: function(xml){
-  console.log(planetimage);
+//  console.log(planetimage);
             }
           });
         },
@@ -1128,10 +1128,10 @@ console.log(ufilename);
     }
     function redrawjson(rflag){
       $.getJSON(rfname+"?"+(new Date().getTime()), function(da) {
-  console.log("json:",rfname);
+//  console.log("json:",rfname);
         var len = da.length;
         if((len <= 1)&&(rflag == true)){
-  console.log("no data:"+rfname);
+//  console.log("no data:"+rfname);
           putbimg('common/images/nodata.png');
         }else{
           putbimg('common/images/originalplanet.png');
@@ -1146,7 +1146,7 @@ console.log(ufilename);
         if(rflag == false){
           putbimg('common/images/originalplanet.png');
         }else{
-  console.log("no file:"+rfname);
+//  console.log("no file:"+rfname);
           putbimg('common/images/nodata.png');
         }
       });
@@ -1157,7 +1157,7 @@ console.log(ufilename);
       if($.cookie(jquery_chat_unique) !== 'undefined'){
         rfname = "save/planet"+$.cookie(jquery_chat_unique)+".json";
           $.when(redrawjson(rflag)).done(function() {
-    console.log("redraw-fin");
+//  console.log("redraw-fin");
         });
       }
     }
@@ -1215,10 +1215,10 @@ console.log(ufilename);
     });
     function setbtn(val){
       $('#'+val).on('click', function () {
-  console.log("Called");
+//  console.log("Called");
         $mc.masonry('remove', $mc.find('.item')).masonry('layout');
         $.getJSON("img/"+val+"/files.json"+"?"+(new Date().getTime()), function(data) {
-  console.log("OK load");
+//  console.log("OK load");
           $.each(data, function(){
   		  var $item = $('<div class="item"><img src="img/'+val+'/'+this+'"/></div>');
             $mc.append($item).masonry('appended', $item).masonry('layout');
@@ -1231,7 +1231,7 @@ console.log(ufilename);
       if(imgsrc = event.target.src){
         var fname = imgsrc.split('/');
         var filen = fname[fname.length-2]+'/'+fname[fname.length-1];
-  console.log(filen);
+//  console.log(filen);
         var pdent = new Object();
         pdent.left = 64;
         pdent.top = 64;
@@ -1245,7 +1245,7 @@ console.log(ufilename);
             $('#nurturemessage').text("");
           },2000);
         }else{
-  console.log("allcost:"+allcost);
+//  console.log("allcost:"+allcost);
           if(parseInt(allcost) == 0){
             redraw(false);
           }
