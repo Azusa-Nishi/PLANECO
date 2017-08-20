@@ -97,13 +97,17 @@ li{
   color: #FFFFFF;
 }
 #logo #lg_left{
+  margin-top: 5px;
   float: left;
   padding-left: 5px;
+}
+#logo #lg_left > p {
+  line-height: 15px;
 }
 #logo #lg_right{
   float: right;
   text-align: right;
-  width: 215px;
+  width: 200px;
 }
 #logo img{
   max-width: 32px;
@@ -652,4 +656,8 @@ h1::after {
   height: 10px;
   border: 3px solid #3498db;
   border-radius: 100%
+}
+
+#marquee {
+  width: 140px;
 }
