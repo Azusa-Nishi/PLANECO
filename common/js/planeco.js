@@ -25,7 +25,7 @@ jQuery.event.add(window,"load",function() {
         'delcookie'  : false,
         'log_login'  : true,
         'log_logof'  : true,
-        'bt_name'    : 'Send your name (max 9 letters)',
+        'bt_name'    : 'Send your name (max 8 letters)',
         'bt_chat'    : 'Write your message',
         'mes_logout' : 'Are you going to leave PLANECO?',
         'err_name'   : 'What is your name?',
