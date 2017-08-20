@@ -1266,4 +1266,13 @@ console.log(ufilename);
       redraw(true);
     });
   };
+/*
+  $(function() {
+    $('#marquee').each(function(){
+      if ($(this).text().replace(/\s+/g,'').length > 20) {
+        $(this).marquee();
+      }          
+    });
+  });
+*/
 })(jQuery);
