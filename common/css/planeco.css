@@ -637,6 +637,7 @@ body > #container > #nurturewin > #fileswin {
 }
 
 h1 {
+  font-size: 1.2em;
   position: relative;
   padding: .2em 1em .2em 1.2em;
   border: 1px solid #ccc;

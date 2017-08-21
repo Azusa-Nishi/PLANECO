@@ -64,8 +64,9 @@ $pcanvas = $('#planetcanvas');
 '- Image: Download the image of your current planet design as a PNG imnage.<br>'+
 '- Upload: Upload the image of your current planet design as your Chat message.<br>'+
 '<img src="common/images/nurture.png" style="background-color:#000;"/> Get planet ornaments. It shows your total Good! points and used number of items and Good! points to get planet ornaments. Push the blue points icon, then it shows various fancy planet ornaments. Push it and get it.<br>'+
-'<img src="common/images/logof.png" style="background-color:#000;"/> Log off PLANECO'+
-'Please press CONFIRM if you observe the terms.',
+'<img src="common/images/logof.png" style="background-color:#000;"/> Log off PLANECO<br>'+
+'<img src="common/images/planeconew-mini1.png" /> Change chat room. You can select various chat room of ECO topics to tap the top left corner of PLANECO screen.<br>'+
+'<br>Please press CONFIRM if you observe the terms above.',
         'chatroom'      : '<h1>Chat Rooms</h1>'+
 '<ul><li>PLANECO Chat-room 1<br>Main PLANECO Chat ROOM<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/index.html\'" value="ENTER ROOM#1"/></li>'+
 '<ul><li>PLANECO Chat-room 2<br>For beginners<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/r2.html\'" value="ENTER ROOM#2"/></li>'+
@@ -566,7 +567,7 @@ var html = '';
    *------------------------------------*/
         if($(this).text() === opt.bt_name){
           $.confirm({
-            title: 'Note',
+            title: 'Notes and How to Use',
             content: '<img src="common/images/planeco-icon-mini.png" width="64"><br><span class="quizans">'+opt.terms+'</span>',
             buttons: {
               confirm: function () {
@@ -663,7 +664,7 @@ var html = '';
             }
             if(val === '#help'){
               var str  = '<li class="li3" id="setumei">';
-				  str += '[#quiz]<br />Challenge to an ECO quiz. PLANECO will teach you the answer!<br />';
+                  str += '[#quiz]<br />Challenge to an ECO quiz. PLANECO will teach you the answer!<br />';
                   str += '[#theme]<br />Background color will change randomly.<br />';
                   str += '[#fortune]<br />Draw a fortune slip<br />';
                   str += '[#health]<br />Draw a fortune slip of health.<br />';
