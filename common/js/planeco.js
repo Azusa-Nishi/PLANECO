@@ -65,7 +65,17 @@ $pcanvas = $('#planetcanvas');
 '- Upload: Upload the image of your current planet design as your Chat message.<br>'+
 '<img src="common/images/nurture.png" style="background-color:#000;"/> Get planet ornaments. It shows your total Good! points and used number of items and Good! points to get planet ornaments. Push the blue points icon, then it shows various fancy planet ornaments. Push it and get it.<br>'+
 '<img src="common/images/logof.png" style="background-color:#000;"/> Log off PLANECO'+
-'Please press CONFIRM if you observe the terms.'
+'Please press CONFIRM if you observe the terms.',
+        'chatroom'      : '<h1>Chat Rooms</h1>'+
+'<ul><li>PLANECO Chat-room 1<br>Main PLANECO Chat ROOM<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/index.html\'" value="ENTER ROOM#1"/></li>'+
+'<ul><li>PLANECO Chat-room 2<br>For beginners<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/r2.html\'" value="ENTER ROOM#2"/></li>'+
+'<ul><li>PLANECO Chat-room 3<br>For discussion of air pollution<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/r3.html\'" value="ENTER ROOM#3"/></li>'+
+'<ul><li>PLANECO Chat-room 4<br>For discussion of water pollution<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/r4.html\'" value="ENTER ROOM#4"/></li>'+
+'<ul><li>PLANECO Chat-room 5<br>For discussion of the red list<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/r5.html\'" value="ENTER ROOM#5"/></li>'+
+'<ul><li>PLANECO Chat-room 6<br>For discussion of abnormal climate/weather<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/r6.html\'" value="ENTER ROOM#6"/></li>'+
+'<ul><li>PLANECO Chat-room 7<br>For discussion of increasing sea level<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/r7.html\'" value="ENTER ROOM#7"/></li>'+
+'<ul><li>PLANECO Chat-room 8<br>For discussion of global ecological destruction<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/r8.html\'" value="ENTER ROOM#8"/></li>'+
+'<ul><li>PLANECO Chat-room 9<br>For discussion of other topics<br><input type="button" onclick="location.href=\'https://westclan.jp/PLANECO/r9.html\'" value="ENTER ROOM#9"/></li>'
     }, options);
 
 /*
@@ -1265,14 +1275,16 @@ var html = '';
     $(document).ready(function(){
       redraw(true);
     });
-  };
-/*
-  $(function() {
-    $('#marquee').each(function(){
-      if ($(this).text().replace(/\s+/g,'').length > 20) {
-        $(this).marquee();
-      }          
+    $('#lg_left').on('click', function () {
+      $.confirm({
+        title: 'Chat Room Selection',
+        content: '<img src="common/images/planeco-icon-mini.png" width="64"><br><span class="quizans">'+opt.chatroom+'</span>',
+        buttons: {
+          cancel: function () {
+            text: 'Dismiss'
+          },
+        }
+      });
     });
-  });
-*/
+  };
 })(jQuery);
